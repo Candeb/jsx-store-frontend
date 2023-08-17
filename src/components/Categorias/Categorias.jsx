@@ -10,8 +10,8 @@ import { useQuery } from 'react-query';
 import { Loader } from '../Loader/Loader';
 
 export const fetchBrands = () => {
-  const url = 'http://localhost:3002/brand/brands';
-  // const url = 'https://jsx-store-api.onrender.com/brand/brands';
+  // const url = 'http://localhost:3002/brand/brands';
+  const url = 'https://jsx-store-api.onrender.com/brand/brands';
   return axios.get(url);
 };
 

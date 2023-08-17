@@ -98,7 +98,7 @@ export const Checkout = () => {
                     defaultChecked
                   />
                   <LabelInputBillingDetails for="binance-pay">
-                    <ImgOption src="https://github.com/Candeb/JSX-STORE/blob/main/src/assets/payment/logo-binance.png?raw=true" />
+                    <ImgOption src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/payment/logo-binance.png?raw=true" />
                   </LabelInputBillingDetails>
                 </ContainerInputBig>
                 <ContainerInputBig>
@@ -108,7 +108,7 @@ export const Checkout = () => {
                     id="mercado-pago"
                   />
                   <LabelInputBillingDetails for="mercado-pago">
-                    <ImgOption src="https://github.com/Candeb/JSX-STORE/blob/main/src/assets/payment/logo-mercadopago.png?raw=true" />
+                    <ImgOption src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/payment/logo-mercadopago.png?raw=true" />
                   </LabelInputBillingDetails>
                 </ContainerInputBig>
                 <ContainerInputBig>
@@ -118,7 +118,7 @@ export const Checkout = () => {
                     id="pay-pal"
                   />
                   <LabelInputBillingDetails for="pay-pal">
-                    <ImgOption src="https://github.com/Candeb/JSX-STORE/blob/main/src/assets/payment/logo-Paypal.png?raw=true" />
+                    <ImgOption src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/payment/logo-Paypal.png?raw=true" />
                   </LabelInputBillingDetails>
                 </ContainerInputBig>
               </ContainerPaymentOptions>

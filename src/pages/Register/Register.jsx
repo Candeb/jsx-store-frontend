@@ -23,7 +23,7 @@ export const Register = () => {
       <ContainerRegister>
         <ContainerImgRegister>
           <img
-            src="https://github.com/Candeb/JSX-STORE/blob/main/src/assets/fondo2hero.png?raw=true"
+            src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/fondo2hero.png?raw=true"
             alt=""
           />
         </ContainerImgRegister>

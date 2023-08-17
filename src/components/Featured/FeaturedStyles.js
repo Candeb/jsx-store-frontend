@@ -8,7 +8,7 @@ export const ContainerFeatured = styled.div`
   justify-content: center;
   align-items: center;
   padding: 75px 20px;
-  background-image: url('https://github.com/Candeb/JSX-STORE/blob/main/src/assets/fondoflashsale.jpg?raw=true');
+  background-image: url('https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/fondoflashsale.jpg?raw=true');
   background-size: contain;
   background-repeat: repeat;
   background-attachment: fixed;

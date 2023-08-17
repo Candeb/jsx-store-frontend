@@ -18,7 +18,7 @@ export const ContainerDivsHero = styled.div`
   transition: 0.6s all ease;
 `;
 export const ContainerDivHeroImg = styled(ContainerDivsHero)`
-  background-image: url('https://github.com/Candeb/JSX-STORE/blob/main/src/assets/fondo2hero.png?raw=true');
+  background-image: url('https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/fondo2hero.png?raw=true');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

@@ -34,7 +34,7 @@ export const Header = () => {
         <Link to="/">
           <LogoContainer onClick={scrollToTop}>
             <img
-              src="https://github.com/Candeb/JSX-STORE/blob/main/src/assets/logo.png?raw=true"
+              src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logo.png?raw=true"
               alt="Logo"
             />
           </LogoContainer>

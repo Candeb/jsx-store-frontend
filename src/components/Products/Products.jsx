@@ -16,8 +16,8 @@ import axios from 'axios';
 import { Loader } from '../Loader/Loader';
 
 export const fetchProducts = () => {
-  const url = 'http://localhost:3002/product/products';
-  // const url = 'https://jsx-store-api.onrender.com/product/products';
+  // const url = 'http://localhost:3002/product/products';
+  const url = 'https://jsx-store-api.onrender.com/product/products';
   return axios.get(url);
 };
 
