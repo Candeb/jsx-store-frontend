@@ -249,11 +249,7 @@ export const DescriptionProductCart = styled.div`
   display: flex;
   flex-direction: column;
   width: 70%;
-  gap: 10px;
-
-  @media screen and (max-width: 370px) {
-    gap: 5px;
-  }
+  gap: 5px;
 `;
 
 export const TitleProductCart = styled.div`
@@ -262,6 +258,8 @@ export const TitleProductCart = styled.div`
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
 `;
 export const TextDescriptionProductCart = styled.span`
   font-size: 10px;

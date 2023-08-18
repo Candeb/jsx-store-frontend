@@ -10,10 +10,10 @@ import {
 } from './ProductsStyles';
 import { CardProduct } from './CardProduct';
 import { useSelector } from 'react-redux';
-import { INITIAL_LIMIT } from '../../utils';
+import { INITIAL_LIMIT } from '../../../utils';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { Loader } from '../Loader/Loader';
+import { Loader } from '../../../components/Loader/Loader';
 
 export const fetchProducts = () => {
   // const url = 'http://localhost:3002/product/products';
@@ -24,12 +24,16 @@ export const fetchProducts = () => {
 export const Products = () => {
   const { isLoading, data, error, isError } = useQuery(
     'products',
-    fetchProducts
+    fetchProducts,
+    {
+      staleTime: 2000,
+      cacheTime: 5000,
+    }
   );
 
   useEffect(() => {
     fetchProducts();
-  });
+  }, []);
 
   let products = useSelector((state) => state.products.products);
   let totalProducts = products.length;
@@ -48,7 +52,7 @@ export const Products = () => {
   return (
     <ContainerProducts id="sneakers" name="sneakers">
       <ContainerTitles>
-        <TitleProducts> NUESTROS PRODUCTOS</TitleProducts>
+        <TitleProducts> NUESTROS PRODUCTOS </TitleProducts>
         {isLoading && <Loader />}
         {isError && (
           <h2 style={{ color: 'red', textAling: 'center' }}>

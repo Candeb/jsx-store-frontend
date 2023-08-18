@@ -1,4 +1,4 @@
-import { fetchBrands } from '../../components/Categorias/Categorias';
+import { fetchBrands } from '../../pages/Sneakers/Categorias/Categorias';
 import { SELECT_CATEGORY } from './categories-actions';
 
 const Categories = fetchBrands();

@@ -8,7 +8,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    staleTime: Infinity,
+    cacheTime: 5000,
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

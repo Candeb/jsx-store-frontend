@@ -6,7 +6,7 @@ import {
 } from './FeaturedStyles';
 import { CardFeatured } from './CardFeatured';
 import { useSelector } from 'react-redux';
-import { fetchProducts } from '../Products/Products';
+import { fetchProducts } from '../../pages/Sneakers/Products/Products';
 import { useQuery } from 'react-query';
 import { Loader } from '../Loader/Loader';
 
@@ -29,7 +29,7 @@ export const Featured = () => {
         <h2 style={{ color: 'red', textAling: 'center' }}> {error.message} </h2>
       )}
       <ContainerCardsFeatured>
-        {data?.data.map((recomendado) => (
+        {recommended.map((recomendado) => (
           <CardFeatured key={recomendado.id} {...recomendado} />
         ))}
       </ContainerCardsFeatured>

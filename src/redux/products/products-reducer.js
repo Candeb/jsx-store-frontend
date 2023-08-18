@@ -1,6 +1,6 @@
-import { fetchProducts } from '../../components/Products/Products';
+import { fetchProducts } from '../../pages/Sneakers/Products/Products';
 
-export const products = fetchProducts();
+export const products = fetchProducts;
 
 const INITIAL_STATE = {
   products: products,

@@ -19,6 +19,7 @@ import * as cartActions from '../../redux/cart/cart-actions';
 import { CartIcon } from './Cart/CartIcon';
 import { Link } from 'react-router-dom';
 import { scrollToTop } from '../../App';
+import { NavLinkItem } from '../NavLinkItem/NavLinkItem';
 
 export const Header = () => {
   const [click, setClick] = useState(false);
@@ -41,15 +42,16 @@ export const Header = () => {
         </Link>
 
         <NavBar click={click}>
-          <Link to="/">
-            <NavBarLinks onClick={() => handlerMenu()}>Home</NavBarLinks>
-          </Link>
-          <a href="#sneakers">
-            <NavBarLinks onClick={() => handlerMenu()}>Sneakers</NavBarLinks>
-          </a>
-          <a href="#suscribe">
-            <NavBarLinks onClick={() => handlerMenu()}>Suscribite</NavBarLinks>
-          </a>
+          <NavLinkItem to="/" onClick={() => handlerMenu()}>
+            {' '}
+            Home{' '}
+          </NavLinkItem>
+
+          <NavLinkItem to="/sneakers" onClick={() => handlerMenu()}>
+            Sneakers
+          </NavLinkItem>
+
+          <NavBarLinks onClick={() => handlerMenu()}>Suscribite</NavBarLinks>
         </NavBar>
 
         <Menu>

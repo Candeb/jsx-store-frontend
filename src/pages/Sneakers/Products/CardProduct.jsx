@@ -1,7 +1,10 @@
 import React from 'react';
-import * as cartActions from '../../redux/cart/cart-actions';
+import * as cartActions from '../../../redux/cart/cart-actions';
 import { useDispatch } from 'react-redux';
-import { PriceCard, BtnShopCard } from '../Featured/FeaturedStyles';
+import {
+  PriceCard,
+  BtnShopCard,
+} from '../../../components/Featured/FeaturedStyles';
 import {
   ContainerCardImg,
   ContainerCardInfoProduct,
@@ -9,7 +12,7 @@ import {
   DescCardProduct,
   NameCardProduct,
 } from './ProductsStyles';
-import { formatPrice } from '../../utils';
+import { formatPrice } from '../../../utils';
 import { useState } from 'react';
 import { ModalMessage } from './ModalMessage';
 

@@ -11,49 +11,35 @@ import {
   TextDescriptionProductCart,
   TitleProductCart,
 } from './ModalCartStyles';
-import { IoAdd, IoRemove } from 'react-icons/io5';
+import { IoAdd, IoRemove, IoTrashOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import * as cartActions from '../../../redux/cart/cart-actions';
 import { formatPrice } from '../../../utils/formatPrice';
 
-export const ModalCartCard = ({ title, img, descr, id, price, quantity }) => {
+export const ModalCartCard = (props) => {
+  const { id, name, description, price, picture, quantity } = props;
+
   const dispatch = useDispatch();
 
   return (
     <CardProductCart>
       <ImgProductCart>
-        <img src={img} alt={title} />
+        <img src={picture} alt={name} />
       </ImgProductCart>
       <DescriptionProductCart>
-        <TitleProductCart>{title}</TitleProductCart>
-        <TextDescriptionProductCart>{descr}</TextDescriptionProductCart>
+        <TitleProductCart>
+          {name}
+          <BtnQuantity onClick={() => dispatch(cartActions.removeFromCart(id))}>
+            {' '}
+            <IoTrashOutline />{' '}
+          </BtnQuantity>
+        </TitleProductCart>
+        <TextDescriptionProductCart>{description}</TextDescriptionProductCart>
         <ContainerQuantityPrice>
           <ContainerQuantityProduct>
-            <TextDescriptionProductCart> Cantidad</TextDescriptionProductCart>
-            <BtnQuantity
-              onClick={() => dispatch(cartActions.removeFromCart(id))}
-            >
-              {' '}
-              <IoRemove />{' '}
-            </BtnQuantity>
-            <QuantityProduct> {quantity} </QuantityProduct>
-            <BtnQuantity
-              onClick={() =>
-                dispatch(
-                  cartActions.addToCart({
-                    title,
-                    img,
-                    descr,
-                    id,
-                    price,
-                    quantity,
-                  })
-                )
-              }
-            >
-              {' '}
-              <IoAdd />
-            </BtnQuantity>
+            <TextDescriptionProductCart>
+              {quantity} unidad disponible
+            </TextDescriptionProductCart>
           </ContainerQuantityProduct>
 
           <PriceProductCart> {formatPrice(price)} </PriceProductCart>

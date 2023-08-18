@@ -10,7 +10,7 @@ import {
 } from './FeaturedStyles';
 import { formatPrice } from '../../utils/index';
 import { useDispatch } from 'react-redux';
-import { ModalMessage } from '../Products/ModalMessage';
+import { ModalMessage } from '../../pages/Sneakers/Products/ModalMessage';
 
 export const CardFeatured = (props) => {
   const { id, name, description, price, picture, available } = props;

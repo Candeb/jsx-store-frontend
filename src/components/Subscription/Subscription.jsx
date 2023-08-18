@@ -1,5 +1,5 @@
 import React from 'react';
-import { DescCardProduct } from '../Products/ProductsStyles';
+import { DescCardProduct } from '../../pages/Sneakers/Products/ProductsStyles';
 import {
   BtnSubmit,
   ContainerFormSubs,

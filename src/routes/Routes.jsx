@@ -4,17 +4,17 @@ import { Login } from '../pages/Login/Login';
 import { Register } from '../pages/Register/Register';
 import { ForgotPassword } from '../pages/ForgotPassword/ForgotPassword';
 import { Checkout } from '../pages/Checkout/Checkout';
-import { Brands } from '../pages/Brands/Brands';
+import { Sneakers } from '../pages/Sneakers/Sneakers';
 
 function Routes() {
   return (
     <ReactDomRoutes>
       <Route path="/" element={<Home />} />
+      <Route path="/sneakers" element={<Sneakers />} />
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/register" element={<Register />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/brand/brands" element={<Brands />} />
     </ReactDomRoutes>
   );
 }

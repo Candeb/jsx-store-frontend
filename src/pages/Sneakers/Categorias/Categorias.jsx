@@ -7,7 +7,7 @@ import {
 import { Categoria } from './Categoria';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { Loader } from '../Loader/Loader';
+import { Loader } from '../../../components/Loader/Loader';
 
 export const fetchBrands = () => {
   // const url = 'http://localhost:3002/brand/brands';

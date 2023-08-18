@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { TitleCard } from '../Featured/FeaturedStyles';
+import { TitleCard } from '../../../components/Featured/FeaturedStyles';
 import { TitleCategoria } from '../Categorias/CategoriasStyles';
-import { BtnShopCard } from '../Featured/FeaturedStyles';
+import { BtnShopCard } from '../../../components/Featured/FeaturedStyles';
 
 export const ContainerProducts = styled.div`
   background-color: #e3e3e3;
