@@ -54,14 +54,12 @@ export const CardCategoria = styled.div`
   height: 122px;
   width: 100%;
 
-  &:hover {
-    box-shadow: #2d2d2c94 3px 4px 10px;
-  }
-  &:focus-visible {
-    background-color: black;
-  }
   &:active {
     background-color: black;
+  }
+
+  &:hover {
+    box-shadow: #2d2d2c94 3px 4px 10px;
   }
 `;
 

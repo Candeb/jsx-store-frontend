@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, LogoContainer, MobileIcon, Wrapper } from './HeaderStyles';
-import { IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 export const HeaderUser = () => {
-  const [click, setClick] = useState(false);
-
-  const handlerMenu = () => {
-    setClick(!click);
-  };
-
   return (
     <Container>
       <Wrapper>
@@ -21,10 +14,6 @@ export const HeaderUser = () => {
             />
           </LogoContainer>
         </Link>
-
-        <MobileIcon onClick={() => handlerMenu()}>
-          {click ? <IoCloseOutline /> : <IoMenuOutline />}
-        </MobileIcon>
       </Wrapper>
     </Container>
   );

@@ -17,11 +17,7 @@ export const Categoria = (props) => {
         selected={id === selectedCategory}
         onClick={() => {
           dispatch(categoriesActions.selectCategory(name));
-          this.setState({
-            active: true,
-          });
         }}
-        whileTap={{ scale: 0.95 }}
       >
         <CardCategoriaImg src={picture} alt={name} />
       </CardCategoria>

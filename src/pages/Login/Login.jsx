@@ -32,7 +32,7 @@ export const Login = () => {
         <ContainerFormLogin>
           <Container>
             <LabelInputForm> usuario </LabelInputForm>
-            <InputFormLogin type="email" />
+            <InputFormLogin type="email" autoFocus required />
           </Container>
           <Container>
             <LabelInputForm> contraseña </LabelInputForm>

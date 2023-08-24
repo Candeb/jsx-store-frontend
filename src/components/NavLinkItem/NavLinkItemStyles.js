@@ -5,7 +5,7 @@ export const NavLinkStyled = styled(NavLink)`
   font-size: 15px;
   list-style: none;
   cursor: pointer;
-  height: 100px;
+
   color: #f5f5f5;
   display: flex;
   align-items: center;
@@ -31,5 +31,6 @@ export const NavLinkStyled = styled(NavLink)`
     align-items: center;
     gap: 1px;
     flex-wrap: wrap;
+    height: 100px;
   }
 `;
