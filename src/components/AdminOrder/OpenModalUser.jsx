@@ -13,7 +13,7 @@ export const OpenModalUser = ({ handleOpen, userId }) => {
             style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
           >
             <FontAwesomeIcon icon={faUser} />
-            Ver detalles de {userId}
+            {userId}
           </button>
         </div>
       </div>

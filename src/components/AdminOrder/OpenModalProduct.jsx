@@ -1,8 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { GiConverseShoe } from 'react-icons/gi';
 
-export const OpenModalUser = ({ handleOpen, productId }) => {
+export const OpenModalProduct = ({ handleOpen, productId }) => {
   return (
     <div className="row mt-1">
       <div className="col-md-4 ">
@@ -10,10 +11,9 @@ export const OpenModalUser = ({ handleOpen, productId }) => {
           <button
             onClick={handleOpen}
             className="btn btn-dark"
-            style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
           >
-            <FontAwesomeIcon icon={faUser} />
-            Product {productId}
+            <GiConverseShoe /> id{productId}
           </button>
         </div>
       </div>

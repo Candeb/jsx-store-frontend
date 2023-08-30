@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { NavBar } from '../../../components/Header/HeaderStyles';
-import { NavLinkItem } from '../../../components/NavLinkItem/NavLinkItem';
 import { NavLink } from 'react-router-dom';
 
 export const AdminContainer = styled.div`
@@ -19,6 +18,22 @@ export const ContainerAdminNavBar = styled.aside`
   align-items: center;
   padding: 0px 20px;
   height: 100%;
+
+  @media screen and (max-width: 960px) {
+    /* ;
+    
+    align-items: center;
+    background-color: black;
+    justify-content: flex-start;
+    gap: 0px;
+    
+    padding: 50px 0px;
+
+    & a {
+      width: 100vw;
+    } */
+    display: none;
+  }
 `;
 
 export const AdminNavBar = styled(NavBar)`
@@ -121,4 +136,58 @@ export const TitleDashboard = styled.p`
   font-size: 30px;
   text-align: center;
   letter-spacing: 2px;
+`;
+
+export const MenuIconAdmin = styled.div`
+  display: none;
+
+  @media screen and (max-width: 960px) {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: -1px 2px 8px black;
+    cursor: pointer;
+    color: black;
+    font-size: 23px;
+    top: 0px;
+    left: ${({ click }) => (click ? 0 : '-100%')};
+    height: 100vh;
+    background-color: rgb(rgba(104, 104, 104, 0.7), 158, 158);
+    padding: 5px;
+    transition: 0.7s all ease;
+    z-index: 99;
+  }
+`;
+export const ContainerMenu = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+export const IconsMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  align-items: center;
+`;
+
+export const AdminNavLinkMobile = styled(NavLink)`
+  color: black;
+  transition: 6s all ease;
+
+  &.active {
+    color: white;
+    background: #292a2d;
+    border-radius: 10px;
+    transition: all 2s ease 0s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0px;
+    font-size: 21px;
+  }
 `;

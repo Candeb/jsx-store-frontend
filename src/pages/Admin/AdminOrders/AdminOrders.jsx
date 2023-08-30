@@ -100,14 +100,6 @@ export const AdminOrders = () => {
                         flexDirection: 'column',
                       }}
                     >
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          navigate(`/admin/orders/edit/${order.id}`)
-                        }
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>
                       <DeleteButtonOrder id={order.id}>
                         Eliminar
                       </DeleteButtonOrder>
