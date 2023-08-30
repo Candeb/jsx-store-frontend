@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ContainerCardsCategorias,
   ContainerCategorias,
@@ -10,13 +10,16 @@ import { useQuery } from 'react-query';
 import { Loader } from '../../../components/Loader/Loader';
 
 export const fetchBrands = () => {
-  // const url = 'http://localhost:3002/brand/brands';
-  const url = 'https://jsx-store-api.onrender.com/brand/brands';
+  const url = 'https://jsx-store-api.onrender.com/brand/allbrands';
   return axios.get(url);
 };
 
 export const Categorias = () => {
   const { isLoading, data, error, isError } = useQuery('brands', fetchBrands);
+
+  useEffect(() => {
+    fetchBrands();
+  }, []);
 
   return (
     <ContainerCategorias>

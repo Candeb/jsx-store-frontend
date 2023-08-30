@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-const addBrand = (brand) => {
-  return axios.post('https://jsx-store-api.onrender.com/brand/new', brand);
+const addUser = (user) => {
+  return axios.post('https://jsx-store-api.onrender.com/auth/register', user);
 };
 
-export const useAddBrand = () => {
+export const useAddUser = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(addBrand, {
+  return useMutation(addUser, {
     onSuccess: (data) => {
-      queryClient.invalidateQueries('brands', (oldQueryData) => {
+      queryClient.invalidateQueries('users', (oldQueryData) => {
         return {
           ...oldQueryData,
           data: [...oldQueryData.data, data.data],

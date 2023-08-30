@@ -148,7 +148,6 @@ export const ContainerCardProduct = styled.div`
 `;
 
 export const ContainerCardImg = styled.div`
-  width: 185px;
   transition: all 0.5s ease 0s;
   margin: 0px auto;
   height: 150px;
@@ -157,7 +156,7 @@ export const ContainerCardImg = styled.div`
 
   & img {
     height: 100%;
-    width: 100%;
+    width: 85%;
     object-fit: contain;
   }
 

@@ -13,10 +13,6 @@ export const handlerSubmit = (form) => {
   return new Promise((res, rej) => {
     const keys = Object.keys(form);
 
-    if (keys.length < 2) {
-      rej('Complete correctamente todos los datos perri');
-    }
-
     keys.forEach((key) => {
       if (!form[key].trim()) {
         rej('Hay campos incompletos....');

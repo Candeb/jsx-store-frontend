@@ -6,79 +6,32 @@ import {
   ContainerTitleRoute,
   DivTriang,
   TitleRoute,
-} from '../AdminDashboard.jsx/AdminDashboardStyles';
-import { AdminMenu } from '../AdminMenu/AdminMenu';
+} from '../AdminDashboard/AdminDashboardStyles';
+import { AdminMenu } from '../../../components/AdminMenu/AdminMenu';
 import { useQuery } from 'react-query';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import { show_alerta } from '../../../utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Loader } from '../../../components/Loader/Loader';
-import { OpenModal } from '../../../components/OpenModal/OpenModal';
-import { ModalForm } from '../../../components/ModalFormAdmin/ModalForm';
+import { ModalFormBrands } from '../../../components/AdminBrand/ModalFormBrands/ModalFormBrands';
 import { useDeleteBrand } from '../../../hooks/brands/useDeleteBrands';
+import { useNavigate } from 'react-router-dom';
+import { DeleteButtonBrand } from '../../../components/AdminBrand/DeleteButtonBrand';
+
 export const fetchBrands = () => {
-  // const url = 'http://localhost:3002/brand/brands';
-  const url = 'https://jsx-store-api.onrender.com/brand/brands';
+  const url = 'https://jsx-store-api.onrender.com/brand/allbrands';
   return axios.get(url);
 };
 
 export const AdminBrands = () => {
-  const { isLoading, data, error, isError } = useQuery('brands', fetchBrands, {
-    staleTime: 2000,
-    cacheTime: 5000,
-  });
-
-  const postBrands = () => {
-    try {
-      const url = 'https://jsx-store-api.onrender.com/brand/new';
-      const data = { name: name, email: email };
-      const response = axios.post(url, data);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [picture, setPicture] = useState('');
-  const [operation, setOperation] = useState(1);
-  const [title, setTitle] = useState('');
+  const { isLoading, data, error, isError } = useQuery('brands', fetchBrands);
 
   useEffect(() => {
     fetchBrands();
   }, []);
 
+  const navigate = useNavigate();
+
   const { mutate } = useDeleteBrand();
-
-  const handleDelete = () => {
-    const auth = window.confirm(
-      `Estas seguro que queres eliminar ${name} esta banda de tu lista? `
-    );
-    if (id && auth) {
-      mutate(id);
-    }
-  };
-
-  // const deleteProduct = (id, name) => {
-  //   const MySwal = withReactContent(Swal);
-  //   MySwal.fire({
-  //     title: '¿Seguro de eliminar el producto ' + name + ' ?',
-  //     icon: 'question',
-  //     text: 'No se podrá dar marcha atrás',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Si, eliminar',
-  //     cancelButtonText: 'Cancelar',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       setId(id);
-  //       envarSolicitud('DELETE', { id: id });
-  //     } else {
-  //       show_alerta('El producto NO fue eliminado', 'info');
-  //     }
-  //   });
-  // };
 
   return (
     <AdminContainer>
@@ -88,56 +41,81 @@ export const AdminBrands = () => {
           <TitleRoute> Marcas </TitleRoute>
           <DivTriang></DivTriang>
         </ContainerTitleRoute>{' '}
-        {isLoading && <Loader />}
-        {isError && (
-          <h2 style={{ color: 'red', textAling: 'center' }}>
-            {' '}
-            {error.message}{' '}
-          </h2>
-        )}
+        <ModalFormBrands
+          message={'Añadir nueva marca'}
+          description={'Aqui puedes añadir los datos de la marca'}
+        />
         <div className="table-responsive">
-          <table className="table table-hover">
-            <thead>
+          <table
+            className="table table-hover table-bordered"
+            style={{ marginTop: '20px' }}
+          >
+            <thead className="thead-dark">
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Imagen</th>
+                <th>Estado</th>
                 <th>Acciones</th>
               </tr>
             </thead>
+
             <tbody>
               {data?.data.map((brand) => {
                 return (
                   <tr key={brand.id}>
-                    <td>{brand.id}</td>
-                    <td>{brand.name}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>{brand.id}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>{brand.name}</td>
                     <td>
                       {' '}
                       <img
                         src={brand.picture}
-                        style={{ height: '80px' }}
+                        style={{
+                          height: '80px',
+                          objectFit: 'contain',
+                          width: '100%',
+                        }}
                       />{' '}
                     </td>
-                    <td style={{ display: 'flex', gap: '5px' }}>
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      {brand.deleted_at === null ? 'Activo' : 'Eliminado'}
+                    </td>
+                    <td
+                      style={{
+                        display: 'flex',
+                        gap: '5px',
+                        flexDirection: 'column',
+                      }}
+                    >
                       <button
                         className="btn btn-primary"
-                        onClick={() => (onClick = { handleOpen })}
+                        onClick={() =>
+                          navigate(`/admin/brands/edit/${brand.id}`)
+                        }
                       >
                         <FontAwesomeIcon icon={faEdit} />
                       </button>
-                      {'   '}
-                      <button className="btn btn-danger" onClick={handleDelete}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </button>
+                      <DeleteButtonBrand id={brand.id}>
+                        Eliminar
+                      </DeleteButtonBrand>
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>{' '}
-        </div>
+        </div>{' '}
+        {isLoading && <Loader />}
+        {isError && (
+          <h2
+            style={{
+              color: 'red',
+            }}
+          >
+            {error.message}
+          </h2>
+        )}
       </ContainerInfoAdmin>
-      <ModalForm />
     </AdminContainer>
   );
 };

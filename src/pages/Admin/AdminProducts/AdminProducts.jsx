@@ -1,131 +1,125 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import {
   AdminContainer,
   ContainerInfoAdmin,
-  TitleRoute,
-  DivTriang,
   ContainerTitleRoute,
-} from '../AdminDashboard.jsx/AdminDashboardStyles';
-import { AdminMenu } from '../AdminMenu/AdminMenu';
-import { fetchProducts } from '../../Sneakers/Products/Products';
-import { Loader } from '../../../components/Loader/Loader';
+  DivTriang,
+  TitleRoute,
+} from '../AdminDashboard/AdminDashboardStyles';
+import { AdminMenu } from '../../../components/AdminMenu/AdminMenu';
 import { useQuery } from 'react-query';
-import { useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faEdit,
-  faTrashAlt,
-  faCirclePlus,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Loader } from '../../../components/Loader/Loader';
+import { ModalFormProducts } from '../../../components/AdminProduct/ModalFormProducts';
+import { useNavigate } from 'react-router-dom';
+import { DeleteButtonProduct } from '../../../components/AdminProduct/DeleteButtonProduct';
+
+export const fetchProducts = () => {
+  // const url = 'http://localhost:3002/brand/brands';
+  const url = 'https://jsx-store-api.onrender.com/product/products';
+  return axios.get(url);
+};
 
 export const AdminProducts = () => {
   const { isLoading, data, error, isError } = useQuery(
     'products',
-    fetchProducts,
-    {
-      staleTime: 2000,
-      cacheTime: 5000,
-    }
+    fetchProducts
   );
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <AdminContainer>
       <AdminMenu />
-
       <ContainerInfoAdmin>
         <ContainerTitleRoute>
-          <TitleRoute> Productos </TitleRoute>
+          <TitleRoute> Products </TitleRoute>
           <DivTriang></DivTriang>
-        </ContainerTitleRoute>
-        <div className="row mt-1">
-          <div className="col-md-4 ">
-            <div className="d-grid mx-auto">
-              <button
-                onClick={() => openModal(1)}
-                className="btn btn-dark"
-                data-bs-toggle="modal"
-                data-bs-target="#modalProducts"
-              >
-                <FontAwesomeIcon
-                  icon={faCirclePlus}
-                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
-                />
-                Añadir
-              </button>
-            </div>
-          </div>
-        </div>
-        {isLoading && <Loader />}
-        {isError && (
-          <h2 style={{ color: 'red', textAling: 'center' }}>
-            {' '}
-            {error.message}{' '}
-          </h2>
-        )}
-
+        </ContainerTitleRoute>{' '}
+        <ModalFormProducts
+          message={'Añadir nuevo producto'}
+          description={'Aqui puedes añadir los datos del producto'}
+        />
         <div className="table-responsive">
-          <table className="table table-hover">
-            <thead>
+          <table
+            className="table table-hover table-bordered"
+            style={{ marginTop: '20px' }}
+          >
+            <thead className="thead-dark">
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Description</th>
+                <th>Descripcion</th>
                 <th>Precio</th>
                 <th>Imagen</th>
-                <th>Marca</th>
                 <th>Stock</th>
+                <th>Marca</th>
+                <th>Estado</th>
                 <th>Acciones</th>
               </tr>
             </thead>
+
             <tbody>
               {data?.data.map((product) => {
                 return (
                   <tr key={product.id}>
-                    <td>{product.id}</td>
-                    <td>{product.name}</td>
-                    <td>{product.description}</td>
-                    <td> ${product.price}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>{product.id}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>{product.name}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      {product.description}
+                    </td>
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      ${product.price}
+                    </td>
                     <td>
                       {' '}
                       <img
                         src={product.picture}
-                        style={{ height: '50px' }}
+                        style={{
+                          height: '80px',
+                          objectFit: 'contain',
+                          width: '100%',
+                        }}
                       />{' '}
                     </td>
-                    <td>
-                      {' '}
-                      {product.brandsId === 1
-                        ? 'Nike'
-                        : product.brandsId === 2
-                        ? 'Adidas'
-                        : 'Balenciaga'}{' '}
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      {product.available ? 'En stock' : 'Sin stock'}
                     </td>
-                    <td> {product.available ? 'en stock' : 'sin stock'} </td>
-                    <td style={{ display: 'flex', gap: '5px' }}>
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      {product.brandsId}
+                      {/* {product.brandsId === 1
+                        ? ` ${product.brandsId}: Nike`
+                        : product.brandsId === 2
+                        ? `${product.brandsId}: Adidas`
+                        : `${product.brandsId}: Balenciaga`} */}
+                    </td>
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      {product.deleted_at === null ? 'Activo' : 'Eliminado'}
+                    </td>
+                    <td
+                      style={{
+                        display: 'flex',
+                        gap: '5px',
+                        flexDirection: 'column',
+                      }}
+                    >
                       <button
                         className="btn btn-primary"
-                        // onClick={() => {
-                        //   this.seleccionarEmpresa(empresa);
-                        //   this.modalInsertar();
-                        // }}
+                        onClick={() =>
+                          navigate(`/admin/products/edit/${product.id}`)
+                        }
                       >
                         <FontAwesomeIcon icon={faEdit} />
                       </button>
-                      {'   '}
-                      <button
-                        className="btn btn-danger"
-                        // onClick={() => {
-                        //   this.seleccionarEmpresa(empresa);
-                        //   this.setState({ modalEliminar: true });
-                        // }}
-                      >
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </button>
+                      <DeleteButtonProduct id={product.id}>
+                        eliminar
+                      </DeleteButtonProduct>
                     </td>
                   </tr>
                 );
@@ -133,6 +127,16 @@ export const AdminProducts = () => {
             </tbody>
           </table>{' '}
         </div>
+        {isLoading && <Loader />}
+        {isError && (
+          <h2
+            style={{
+              color: 'red',
+            }}
+          >
+            {error.message}
+          </h2>
+        )}
       </ContainerInfoAdmin>
     </AdminContainer>
   );

@@ -29,7 +29,7 @@ export const AdminLogin = () => {
             required
           />
           <AdminInputForm type="password" placeholder="Contraseña" />
-          <Link to="/admin">
+          <Link to="/admin/dashboard">
             <Button variant="contained" color="primary">
               Ingresar
             </Button>

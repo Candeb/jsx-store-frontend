@@ -11,6 +11,8 @@ export const ModalContainerStyled = styled.div`
   border-radius: 20px;
   box-shadow: 24px;
   padding: 38px;
+  height: 90%;
+  overflow-y: scroll;
   &:focus {
     outline: none;
   }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-export const OpenModal = ({ handleOpen }) => {
+export const OpenModalUser = ({ handleOpen, productId }) => {
   return (
     <div className="row mt-1">
       <div className="col-md-4 ">
@@ -12,8 +12,8 @@ export const OpenModal = ({ handleOpen }) => {
             className="btn btn-dark"
             style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
           >
-            <FontAwesomeIcon icon={faCirclePlus} />
-            Añadir
+            <FontAwesomeIcon icon={faUser} />
+            Product {productId}
           </button>
         </div>
       </div>

@@ -8,7 +8,7 @@ import {
   DivTriang,
   ContainerDashboard,
 } from './AdminDashboardStyles';
-import { AdminMenu } from '../AdminMenu/AdminMenu';
+import { AdminMenu } from '../../../components/AdminMenu/AdminMenu';
 
 export const AdminDashboard = () => {
   return (

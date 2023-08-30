@@ -1,14 +1,17 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-const addBrand = (brand) => {
-  return axios.post('https://jsx-store-api.onrender.com/brand/new', brand);
+const updateBrand = (brand) => {
+  return axios.put(
+    `https://jsx-store-api.onrender.com/brand/update/${brand.id}`,
+    brand
+  );
 };
 
-export const useAddBrand = () => {
+export const useUpdateBrand = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(addBrand, {
+  return useMutation(updateBrand, {
     onSuccess: (data) => {
       queryClient.invalidateQueries('brands', (oldQueryData) => {
         return {

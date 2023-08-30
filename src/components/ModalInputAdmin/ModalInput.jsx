@@ -4,6 +4,7 @@ import {
   InputLabelStyled,
   InputStyled,
 } from './ModalInputStyles';
+import { Stack, Typography, Switch } from '@mui/material';
 
 export const ModalInput = ({
   type,
@@ -13,26 +14,35 @@ export const ModalInput = ({
   handleChange,
 }) => {
   return (
-    <InputContainerStyled full={name === 'img' ? true : false}>
+    <InputContainerStyled>
       <InputLabelStyled htmlFor={name}>{label}</InputLabelStyled>
-      {type === 'number' ? (
-        <InputStyled
-          id={name}
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          min="1"
-          onChange={(e) => handleChange(e)}
-        />
-      ) : (
-        <InputStyled
-          id={name}
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          onChange={(e) => handleChange(e)}
-        />
-      )}
+      {/* {type === 'boolean' ? (
+        <Stack direction="row" alignItems="center">
+          <Typography color="white" fontSize="14px">
+            Sin stock
+          </Typography>
+          <Switch
+            defaultChecked
+            value="true"
+            inputProps={{ 'aria-label': 'controlled' }}
+            onChange={(e) => handleChange(e)}
+            name={name}
+            id={name}
+            type={type}
+          />
+          <Typography color="white" fontSize="14px">
+            Con stock
+          </Typography>
+        </Stack>
+      ) : ( */}
+      <InputStyled
+        id={name}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        autoComplete="on"
+        onChange={(e) => handleChange(e)}
+      />
     </InputContainerStyled>
   );
 };

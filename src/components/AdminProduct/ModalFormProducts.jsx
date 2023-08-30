@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { handlerSubmit } from '../../utils/functions';
 import { ModalInput } from '../ModalInputAdmin/ModalInput';
 import {
@@ -8,20 +7,19 @@ import {
   ModalContainerStyled,
   ModalDescriptionStyled,
   ModalTitleStyled,
-} from './ModalFormStyles';
+} from '../AdminBrand/ModalFormBrands/ModalFormStyles';
 import Modal from '@mui/material/Modal';
 import { Button } from '@mui/material';
 import { OpenModal } from '../OpenModal/OpenModal';
-import { useAddBrand } from '../../hooks/brands/useAddBrand';
+import { useAddProduct } from '../../hooks/products/useAddProduct';
 
-export const ModalForm = () => {
+export const ModalFormProducts = ({ message, description }) => {
   const [form, setForm] = useState({});
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { mutate } = useAddBrand();
+  const { mutate } = useAddProduct();
 
   const handleChange = (e) => {
     setForm({
@@ -29,6 +27,15 @@ export const ModalForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const renderField = (label, name, type) => (
+    <div style={{ width: '100%' }}>
+      <label style={{ color: 'white' }} htmlFor={name}>
+        {label}
+      </label>
+      <ModalInput handleChange={handleChange} name={name} type={type} />
+    </div>
+  );
 
   return (
     <div>
@@ -43,49 +50,20 @@ export const ModalForm = () => {
         aria-describedby="modal-modal-description"
       >
         <ModalContainerStyled>
-          <ModalTitleStyled>¡React Query Mutations!</ModalTitleStyled>
-          <ModalDescriptionStyled>
-            A continuación vamos a rellenar un formulario para poder realizar
-            nuestras primeras mutaciones.
-          </ModalDescriptionStyled>
+          <ModalTitleStyled>{message}</ModalTitleStyled>
+          <ModalDescriptionStyled>{description}</ModalDescriptionStyled>
+
           <InputsContainerStyled>
-            <ModalInput
-              type="text"
-              name="name"
-              label="Nombre de la marca"
-              handleChange={handleChange}
-            />
-            {/* <ModalInput
-              type="text"
-              name="genre"
-              label="Género musical"
-              handleChange={handleChange}
-            />
-            <ModalInput
-              type="text"
-              name="lastSong"
-              label="Último lanzamiento"
-              handleChange={handleChange}
-            />
-            <ModalInput
-              type="number"
-              name="listeners"
-              placeholder="Completarlo con números"
-              label="N° de Oyentes"
-              handleChange={handleChange}
-            /> */}
-            <ModalInput
-              type="text"
-              name="picture"
-              placeholder="Completarlo con el link de la imágen"
-              label="Foto de perfil"
-              handleChange={handleChange}
-            />
+            {renderField('Nombre', 'name', 'text')}
+            {renderField('description', 'description', 'text')}
+            {renderField('price', 'price', 'number')}
+            {renderField('picture', 'picture', 'text')}
+            {renderField('brandsId', 'brandsId', 'number')}
           </InputsContainerStyled>
 
           <ButtonsContainerStyled>
             <Button
-              sx={{ backgroundColor: '#4c1d95' }}
+              sx={{ backgroundColor: '#536262' }}
               variant="contained"
               onClick={() => {
                 handleClose();
@@ -95,7 +73,7 @@ export const ModalForm = () => {
               Cancelar
             </Button>
             <Button
-              sx={{ backgroundColor: '#4c1d95' }}
+              sx={{ backgroundColor: 'green' }}
               variant="contained"
               onClick={() =>
                 handlerSubmit(form)
@@ -103,12 +81,12 @@ export const ModalForm = () => {
                     handleClose();
                     setForm({});
                     mutate(res);
-                    // window.location.reload();
+                    console.log('product--->', res);
                   })
                   .catch((err) => alert(err))
               }
             >
-              Enviar
+              Crear
             </Button>
           </ButtonsContainerStyled>
         </ModalContainerStyled>

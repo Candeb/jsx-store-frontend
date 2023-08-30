@@ -5,20 +5,18 @@ import {
   TitleRoute,
   DivTriang,
   ContainerTitleRoute,
-} from '../AdminDashboard.jsx/AdminDashboardStyles';
+} from '../AdminDashboard/AdminDashboardStyles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faEdit,
-  faTrashAlt,
-  faCirclePlus,
-} from '@fortawesome/free-solid-svg-icons';
-import { AdminMenu } from '../AdminMenu/AdminMenu';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { AdminMenu } from '../../../components/AdminMenu/AdminMenu';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Loader } from '../../../components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
+import { ModalFormUsers } from '../../../components/AdminUser/ModalFormUsers';
+import { DeleteButtonUser } from '../../../components/AdminUser/DeleteButtonUser';
 
 export const fetchUsers = () => {
   // const url = 'http://localhost:3002/auth/users';
@@ -27,107 +25,66 @@ export const fetchUsers = () => {
 };
 
 export const AdminUsers = () => {
-  const { isLoading, data, error, isError } = useQuery('users', fetchUsers, {
-    staleTime: 2000,
-    cacheTime: 5000,
-  });
+  const { isLoading, data, error, isError } = useQuery('users', fetchUsers);
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  // let users = useSelector((state) => state.users.users);
-  // let totalUsers = users.length;
-
-  // peticionGet = () => {
-  //   axios
-  //     .get(url)
-  //     .then((response) => {
-  //       this.setState({ data: response.data });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
+  const navigate = useNavigate();
 
   return (
     <AdminContainer>
       <AdminMenu />
-
       <ContainerInfoAdmin>
         <ContainerTitleRoute>
           <TitleRoute> Usuarios </TitleRoute>
           <DivTriang></DivTriang>
-        </ContainerTitleRoute>
-        <div className="row mt-1">
-          <div className="col-md-4 ">
-            <div className="d-grid mx-auto">
-              <button
-                onClick={() => openModal(1)}
-                className="btn btn-dark"
-                data-bs-toggle="modal"
-                data-bs-target="#modalProducts"
-              >
-                <FontAwesomeIcon
-                  icon={faCirclePlus}
-                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
-                />
-                Añadir
-              </button>
-            </div>
-          </div>
-        </div>
-        {isLoading && <Loader />}
-        {isError && (
-          <h2 style={{ color: 'red', textAling: 'center' }}>
-            {' '}
-            {error.message}{' '}
-          </h2>
-        )}
-
+        </ContainerTitleRoute>{' '}
+        <ModalFormUsers
+          message={'Añadir nuevo usuario'}
+          description={'Aqui puedes añadir los datos del usuario'}
+        />
         <div className="table-responsive">
-          <table className="table table-hover">
-            <thead>
+          <table
+            className="table table-hover table-bordered"
+            style={{ marginTop: '20px' }}
+          >
+            <thead className="thead-dark">
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Email</th>
+                <th>Estado</th>
                 <th>Rol</th>
-                <th>Activo</th>
                 <th>Acciones</th>
               </tr>
             </thead>
+
             <tbody>
               {data?.data.map((user) => {
                 return (
                   <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.lastname}</td>
-                    <td>{user.email}</td>
-                    <td>{user.role}</td>
-                    <td>{user.deleted_at === null ? 'Activo' : 'Eliminado'}</td>
-                    <td style={{ display: 'flex', gap: '5px' }}>
-                      <button
-                        className="btn btn-primary"
-                        // onClick={() => {
-                        //   this.seleccionarEmpresa(empresa);
-                        //   this.modalInsertar();
-                        // }}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>
-                      {'   '}
-                      <button
-                        className="btn btn-danger"
-                        // onClick={() => {
-                        //   this.seleccionarEmpresa(empresa);
-                        //   this.setState({ modalEliminar: true });
-                        // }}
-                      >
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </button>
+                    <td style={{ verticalAlign: 'inherit' }}>{user.id}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>{user.name}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      {user.lastname}
+                    </td>
+                    <td style={{ verticalAlign: 'inherit' }}>{user.email}</td>
+                    <td style={{ verticalAlign: 'inherit' }}>
+                      {user.deleted_at === null ? 'Activo' : 'Eliminado'}
+                    </td>
+                    <td style={{ verticalAlign: 'inherit' }}>{user.role}</td>
+
+                    <td
+                      style={{
+                        display: 'flex',
+                        gap: '5px',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      <DeleteButtonUser id={user.id}>Eliminar</DeleteButtonUser>
                     </td>
                   </tr>
                 );
@@ -135,6 +92,16 @@ export const AdminUsers = () => {
             </tbody>
           </table>{' '}
         </div>
+        {isLoading && <Loader />}
+        {isError && (
+          <h2
+            style={{
+              color: 'red',
+            }}
+          >
+            {error.message}
+          </h2>
+        )}
       </ContainerInfoAdmin>
     </AdminContainer>
   );

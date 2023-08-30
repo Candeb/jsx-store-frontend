@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { NavBar } from '../../../components/Header/HeaderStyles';
 import { NavLinkItem } from '../../../components/NavLinkItem/NavLinkItem';
+import { NavLink } from 'react-router-dom';
 
 export const AdminContainer = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ export const AdminContainer = styled.div`
 `;
 
 export const ContainerAdminNavBar = styled.aside`
-  width: 20%;
+  width: 230px;
   background-color: #686868b3;
   display: flex;
   flex-direction: column;
@@ -22,13 +23,34 @@ export const ContainerAdminNavBar = styled.aside`
 
 export const AdminNavBar = styled(NavBar)`
   background-color: transparent;
-  color: black;
   flex-direction: column;
-  padding: 0px 20px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
 `;
 
-export const AdminNavLink = styled(NavLinkItem)`
+export const AdminNavLink = styled(NavLink)`
   color: black;
+  font-weight: 600;
+  width: 100%;
+  transition: 6s all ease;
+
+  &:hover {
+    color: black;
+    text-decoration: underline;
+    transition: 6s all ease;
+  }
+
+  &.active {
+    color: white;
+    background: black;
+    border-radius: 10px;
+    padding: 8px 15px 8px 5px;
+    width: 100%;
+    text-align: right;
+    transition: 6s all ease;
+  }
 `;
 
 export const ContainerAdminProfile = styled.div`
