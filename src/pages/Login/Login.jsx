@@ -21,6 +21,8 @@ export const Login = () => {
     <>
       <HeaderUser />{' '}
       <ContainerLogin>
+        {' '}
+        <Link to="/admin/login"> Admin</Link>
         <TitleLogin>Ingresa a JSX STORE</TitleLogin>
         <ContainerSubtitleLogin>
           <p>Aún no tienes cuenta?</p>
