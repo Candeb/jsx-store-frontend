@@ -2,6 +2,7 @@ import Routes from './routes/Routes';
 import { Footer } from './components/Footer/Footer';
 
 import Layout from './components/Layout/Layout';
+import { AuthProvider } from './context/authContext';
 
 export const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -9,10 +10,12 @@ export const scrollToTop = () => {
 
 function App() {
   return (
-    <Layout>
-      <Routes />
-      <Footer />
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <Routes />
+        <Footer />
+      </Layout>{' '}
+    </AuthProvider>
   );
 }
 

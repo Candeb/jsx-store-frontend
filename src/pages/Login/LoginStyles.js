@@ -65,7 +65,7 @@ export const SubtitleLogin = styled.div`
   }
 `;
 
-export const ContainerFormLogin = styled.div`
+export const ContainerFormLogin = styled.form`
   padding: 30px;
   display: flex;
   flex-direction: column;

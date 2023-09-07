@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   ContainerFormLogin,
   ContainerLogin,
   LabelInputForm,
-  InputFormLogin,
   BtnSubmit,
   ForgotPassword,
   TitleLogin,
@@ -13,10 +12,39 @@ import {
 } from './LoginStyles';
 import { HeaderUser } from '../../components/Header/HeaderUser';
 HeaderUser;
-import { Link } from 'react-router-dom';
 import { scrollToTop } from '../../App';
+import { useAuth } from '../../context/authContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema } from '../../schemas/auth';
+import { InputForm } from './InputForm';
 
-export const Login = () => {
+export function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
+  const { login, errors: loginErrors, isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+
+  const [signin, setSignin] = useState(false);
+
+  const onSubmit = (data) => {
+    login(data);
+    setSignin(true);
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/user');
+    }
+  }, [isAuthenticated]);
+
   return (
     <>
       <HeaderUser />{' '}
@@ -31,18 +59,42 @@ export const Login = () => {
             <SubtitleLogin> CREAR </SubtitleLogin>
           </Link>
         </ContainerSubtitleLogin>
-        <ContainerFormLogin>
+        <ContainerFormLogin onSubmit={handleSubmit(onSubmit)}>
           <Container>
-            <LabelInputForm> usuario </LabelInputForm>
-            <InputFormLogin type="email" autoFocus required />
+            <LabelInputForm htmlFor="email">Email:</LabelInputForm>
+            <InputForm
+              type="email"
+              name="email"
+              autoFocus
+              required
+              {...register('email', { required: true })}
+            />
+            <p>{errors.email?.message}</p>
           </Container>
           <Container>
-            <LabelInputForm> contraseña </LabelInputForm>
-            <InputFormLogin type="password" />
+            <LabelInputForm htmlFor="password">contraseña:</LabelInputForm>
+            <InputForm
+              type="password"
+              name="password"
+              required
+              {...register('password', { required: true, minLength: 6 })}
+            />
+            <p>{errors.password?.message}</p>
           </Container>
-          <Link to="/">
-            <BtnSubmit onClick={scrollToTop}> iniciar sesión </BtnSubmit>
-          </Link>
+          {loginErrors.map((error, i) => (
+            <p>
+              {' '}
+              {error} key={i}{' '}
+            </p>
+          ))}
+
+          <BtnSubmit type="submit"> iniciar sesión </BtnSubmit>
+
+          {signin ? (
+            <p className="text-success">Iniciaste sesión correctamente!</p>
+          ) : (
+            <p className="text-danger">No has iniciado sesión</p>
+          )}
           <Link to="/forgotpassword">
             <ForgotPassword onClick={scrollToTop}>
               Olvidé mi contraseña
@@ -52,4 +104,4 @@ export const Login = () => {
       </ContainerLogin>
     </>
   );
-};
+}

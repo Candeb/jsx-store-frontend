@@ -8,9 +8,15 @@ import Modal from '@mui/material/Modal';
 import { OpenModalUser } from './OpenModalUser';
 import { useQuery } from 'react-query';
 import { fetchUsers } from '../../pages/Admin/AdminUsers/AdminUsers';
+import { Loader } from '../Loader/Loader';
 
 export const ModalOrderUser = ({ message, description, userId }) => {
-  const { isLoading, data, error, isError } = useQuery('users', fetchUsers);
+  const { isLoading, data, error, isError } = useQuery('users', fetchUsers, {
+    onSuccess: (data) =>
+      console.log('Exito en la peticion de users en orders', data),
+    onError: (error) =>
+      console.log('Error en la peticion de users en orders', error),
+  });
 
   useEffect(() => {
     fetchUsers();
@@ -24,6 +30,16 @@ export const ModalOrderUser = ({ message, description, userId }) => {
 
   return (
     <div>
+      {isLoading && <Loader />}
+      {isError && (
+        <h2
+          style={{
+            color: 'red',
+          }}
+        >
+          {error.message}
+        </h2>
+      )}
       <OpenModalUser userId={userId} handleOpen={handleOpen}>
         Open modal
       </OpenModalUser>

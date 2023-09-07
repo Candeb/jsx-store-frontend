@@ -9,13 +9,11 @@ import {
 } from '../AdminDashboard/AdminDashboardStyles';
 import { AdminMenu } from '../../../components/AdminMenu/AdminMenu';
 import { useQuery } from 'react-query';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Loader } from '../../../components/Loader/Loader';
-import { useNavigate } from 'react-router-dom';
 import { ModalOrderUser } from '../../../components/AdminOrder/ModalOrderUser';
 import { DeleteButtonOrder } from '../../../components/AdminOrder/DeleteButtonOrder';
 import { ModalOrderProduct } from '../../../components/AdminOrder/ModalOrderProduct';
+import { Box, Button } from '@mui/material';
 
 export const fetchOrders = () => {
   const url = 'https://jsx-store-api.onrender.com/order/orders';
@@ -24,28 +22,18 @@ export const fetchOrders = () => {
 };
 
 export const AdminOrders = () => {
-  const { isLoading, data, error, isError } = useQuery('orders', fetchOrders);
+  const { isLoading, data, error, isError, refetch, isIdle } = useQuery(
+    'orders',
+    fetchOrders,
+    {
+      onSuccess: (data) => console.log('Exito en la peticion de orders', data),
+      onError: (error) => console.log('Error en la peticion de orders', error),
+    }
+  );
 
   useEffect(() => {
     fetchOrders();
   }, []);
-
-  const navigate = useNavigate();
-
-  //   const { mutate } = useDeleteBrand();
-
-  //   const [visitedOrder, setVisitedOrder] = useState(null);
-
-  //   useEffect(() => {
-  //     console.log(orders);
-  //     console.log(orders?.find(order => order._id === orderId));
-  //     if(!orders) {
-  //       getOrders(dispatch, currentUser);
-  //     }
-  //     setVisitedOrder(orders?.find(order => order._id === orderId))  }
-  //     , [dispatch, orders, currentUser, orderId]);
-  //   }
-  //   console.log(data.data);
 
   return (
     <AdminContainer>
@@ -121,6 +109,12 @@ export const AdminOrders = () => {
           </h2>
         )}
       </ContainerInfoAdmin>
+      {isIdle && (
+        <Box>
+          <p style={{ color: 'white' }}> Consulta deshabilitada </p>
+          <Button onClick={refetch}>Activar</Button>
+        </Box>
+      )}
     </AdminContainer>
   );
 };
