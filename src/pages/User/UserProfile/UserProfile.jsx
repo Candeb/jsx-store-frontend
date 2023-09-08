@@ -63,7 +63,7 @@ export const UserProfile = () => {
         <ContainerSection>
           <DivImgUser>
             {' '}
-            <ImgUser src="https://i.pinimg.com/736x/9b/f6/45/9bf6455e3b31cb428f36134f3a6a316a.jpg" />{' '}
+            <ImgUser src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/userimg.jpg?raw=true" />{' '}
             <IconButton
               sx={{
                 position: 'absolute',
