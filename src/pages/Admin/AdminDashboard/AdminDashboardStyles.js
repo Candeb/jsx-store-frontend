@@ -133,7 +133,7 @@ export const DivTriang = styled.div`
 `;
 
 export const TitleDashboard = styled.p`
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   letter-spacing: 2px;
 `;

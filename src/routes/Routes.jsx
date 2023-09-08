@@ -13,8 +13,9 @@ import { AdminBrands } from '../pages/Admin/AdminBrands/AdminBrands';
 import { EditBrand } from '../pages/Edit/EditBrand';
 import { EditProduct } from '../pages/Edit/EditProduct';
 import { AdminOrders } from '../pages/Admin/AdminOrders/AdminOrders';
-import { AuthUser } from '../pages/User/AuthUser';
+import { UserProfile } from '../pages/User/UserProfile/UserProfile';
 import { ProtectedRoutes } from './ProtectedRoutes';
+import { UserOrders } from '../pages/User/UserOrders/UserOrders';
 
 function Routes() {
   return (
@@ -25,7 +26,8 @@ function Routes() {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectedRoutes />}>
-        <Route path="/user" element={<AuthUser />} />
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/user/orders" element={<UserOrders />} />
       </Route>
 
       <Route path="/checkout" element={<Checkout />} />

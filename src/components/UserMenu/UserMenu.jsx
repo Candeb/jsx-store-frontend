@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
 import {
   AdminNavBar,
-  ContainerAdminNavBar,
   ContainerAdminProfile,
-  ImgAdmin,
   ImgLogoMenuAdmin,
-  TitleAdmin,
   MenuIconAdmin,
   IconsMenu,
   AdminNavLinkMobile,
   ContainerMenu,
 } from '../../pages/Admin/AdminDashboard/AdminDashboardStyles';
-import { AdminNavLinkItem } from '../AdminMenu/AdminNavLinkItem';
 import { scrollToTop } from '../../App';
 import { IoCloseOutline, IoMenuOutline } from 'react-icons/io5';
-import {
-  BsFillArrowRightCircleFill,
-  BsFillClipboard2CheckFill,
-} from 'react-icons/bs';
+import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { AiFillHome, AiOutlineUser } from 'react-icons/ai';
 import { GiConverseShoe } from 'react-icons/gi';
 import { FiLogOut } from 'react-icons/fi';
 import { MobileIcon } from '../Header/HeaderStyles';
-import { TitleUser } from '../../pages/User/AuthUserStyles';
+import { TitleUser } from '../../pages/User/UserProfile/UserProfileStyles';
 import { useAuth } from '../../context/authContext';
+import { UserNavLink } from './UserNavLink';
+import { ContainerUserNavBar } from './UserMenuStyles';
 
 export const UserMenu = ({ name, lastname }) => {
   const { isAuthenticated, logout, user } = useAuth();
@@ -45,10 +40,7 @@ export const UserMenu = ({ name, lastname }) => {
         </MobileIcon>
         <MenuIconAdmin click={click}>
           <IconsMenu>
-            <AdminNavLinkMobile to="#">
-              <AiFillHome />
-            </AdminNavLinkMobile>
-            <AdminNavLinkMobile to="#">
+            <AdminNavLinkMobile to="/user">
               <AiOutlineUser />
             </AdminNavLinkMobile>
             <AdminNavLinkMobile to="#">
@@ -66,20 +58,17 @@ export const UserMenu = ({ name, lastname }) => {
           />
         </MenuIconAdmin>
       </ContainerMenu>
-      <ContainerAdminNavBar>
+      <ContainerUserNavBar>
         <ContainerAdminProfile>
           <TitleUser>Hola, {name}!</TitleUser>
         </ContainerAdminProfile>
         <AdminNavBar>
-          <AdminNavLinkItem to="/user/dashboard" onClick={() => handlerMenu()}>
-            Dashboard
-          </AdminNavLinkItem>
-          <AdminNavLinkItem to="/user/profile" onClick={() => handlerMenu()}>
+          <UserNavLink to="/user" onClick={() => handlerMenu()}>
             Mis datos
-          </AdminNavLinkItem>
-          <AdminNavLinkItem to="/user/orders" onClick={() => handlerMenu()}>
+          </UserNavLink>
+          <UserNavLink to="/user/orders" onClick={() => handlerMenu()}>
             Mis compras
-          </AdminNavLinkItem>
+          </UserNavLink>
 
           <button onClick={() => logout()}>
             Cerrar sesión <FiLogOut />
@@ -90,7 +79,7 @@ export const UserMenu = ({ name, lastname }) => {
           src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logofavicon.png?raw=true"
           alt="Logo"
         />
-      </ContainerAdminNavBar>{' '}
+      </ContainerUserNavBar>{' '}
     </>
   );
 };
