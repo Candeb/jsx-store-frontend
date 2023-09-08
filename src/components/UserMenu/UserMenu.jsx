@@ -43,7 +43,7 @@ export const UserMenu = ({ name, lastname }) => {
             <AdminNavLinkMobile to="/user">
               <AiOutlineUser />
             </AdminNavLinkMobile>
-            <AdminNavLinkMobile to="#">
+            <AdminNavLinkMobile to="/user/orders">
               <GiConverseShoe />
             </AdminNavLinkMobile>
 
