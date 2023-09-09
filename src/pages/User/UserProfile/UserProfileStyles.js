@@ -27,13 +27,15 @@ export const ContainerInfoUser = styled(ContainerInfoAdmin)`
 export const ContainerSection = styled(ContainerDashboard)`
   display: flex;
   align-items: flex-start;
-  gap: 50px;
-  width: 400px;
-  height: 100%;
+  gap: 10px;
+  width: 80%;
+  background: rgb(245 247 238);
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   padding: 40px;
   flex-direction: column;
+  border-radius: 30px;
+  box-shadow: 0px 7px 20px inset #000000b8;
 `;
 
 export const TitleUser = styled(TitleAdmin)`
@@ -58,7 +60,6 @@ export const UserNavLinkItem = styled(AdminNavLinkItem)`
   transition: 6s all ease;
 
   &:hover {
-    color: black;
     text-decoration: underline;
     transition: 6s all ease;
   }
@@ -80,7 +81,8 @@ export const DataProfile = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  margin-top: 15px;
 `;
 
 export const DivFlex = styled.div`
@@ -90,14 +92,18 @@ export const DivFlex = styled.div`
 export const DataName = styled.p`
   font-size: 22px;
   text-align: center;
+  text-transform: capitalize;
+  font-weight: 700;
 `;
 
-export const DataInfo = styled.p``;
+export const DataInfo = styled.p`
+  font-size: 18px;
+`;
 
 export const DivImgUser = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: -3px;
   width: 100%;
   justify-content: center;

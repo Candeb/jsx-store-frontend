@@ -18,10 +18,10 @@ import { MobileIcon } from '../Header/HeaderStyles';
 import { TitleUser } from '../../pages/User/UserProfile/UserProfileStyles';
 import { useAuth } from '../../context/authContext';
 import { UserNavLink } from './UserNavLink';
-import { ContainerUserNavBar } from './UserMenuStyles';
+import { ContainerUserNavBar, UserNavLinkMobile } from './UserMenuStyles';
 
 export const UserMenu = ({ name, lastname }) => {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const [click, setClick] = useState(false);
 
   const handlerMenu = () => {
@@ -40,12 +40,12 @@ export const UserMenu = ({ name, lastname }) => {
         </MobileIcon>
         <MenuIconAdmin click={click}>
           <IconsMenu>
-            <AdminNavLinkMobile to="/user">
+            <UserNavLinkMobile to="/user">
               <AiOutlineUser />
-            </AdminNavLinkMobile>
-            <AdminNavLinkMobile to="/user/orders">
+            </UserNavLinkMobile>
+            <UserNavLinkMobile to="/user/orders">
               <GiConverseShoe />
-            </AdminNavLinkMobile>
+            </UserNavLinkMobile>
 
             <button onClick={() => logout()}>
               <FiLogOut />

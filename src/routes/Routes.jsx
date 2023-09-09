@@ -16,6 +16,7 @@ import { AdminOrders } from '../pages/Admin/AdminOrders/AdminOrders';
 import { UserProfile } from '../pages/User/UserProfile/UserProfile';
 import { ProtectedRoutes } from './ProtectedRoutes';
 import { UserOrders } from '../pages/User/UserOrders/UserOrders';
+import { EditProfileUser } from '../pages/Edit/EditProfileUser';
 
 function Routes() {
   return (
@@ -28,6 +29,7 @@ function Routes() {
       <Route element={<ProtectedRoutes />}>
         <Route path="/user" element={<UserProfile />} />
         <Route path="/user/orders" element={<UserOrders />} />
+        <Route path="/user/edit/:id" element={<EditProfileUser />} />
       </Route>
 
       <Route path="/checkout" element={<Checkout />} />

@@ -15,6 +15,7 @@ import {
   DataName,
   DataProfile,
   DivImgUser,
+  DataInfo,
 } from './UserProfileStyles';
 import {
   ContainerTitleRoute,
@@ -72,17 +73,19 @@ export const UserProfile = () => {
                 color: 'black',
                 fontSize: '20px',
                 top: '10px',
-                left: '100px',
+                right: '25px',
               }}
+              onClick={() => navigate(`/user/edit/${user.id}`)}
             >
               <FaEdit />
             </IconButton>
           </DivImgUser>
+          <DataName> {user.name} </DataName>
           <DataProfile>
-            <DataName style={{ textTransform: 'capitalize' }}>
+            <DataInfo style={{ textTransform: 'capitalize' }}>
               {user.name} {user.lastname}
-            </DataName>
-            <DataName> {user.email} </DataName>
+            </DataInfo>
+            <DataInfo> {user.email} </DataInfo>
           </DataProfile>
         </ContainerSection>
       </ContainerInfoUser>
