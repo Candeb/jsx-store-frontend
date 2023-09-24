@@ -24,6 +24,8 @@ export const UserMenu = ({ name, lastname }) => {
   const { isAuthenticated, logout } = useAuth();
   const [click, setClick] = useState(false);
 
+  const userId = localStorage.getItem('userId'); //obtener el ID del usuario
+
   const handlerMenu = () => {
     setClick(!click);
     scrollToTop();
@@ -40,7 +42,7 @@ export const UserMenu = ({ name, lastname }) => {
         </MobileIcon>
         <MenuIconAdmin click={click}>
           <IconsMenu>
-            <UserNavLinkMobile to="/user">
+            <UserNavLinkMobile to={`/user/${userId}`}>
               <AiOutlineUser />
             </UserNavLinkMobile>
             <UserNavLinkMobile to="/user/orders">
@@ -63,7 +65,7 @@ export const UserMenu = ({ name, lastname }) => {
           <TitleUser>Hola, {name}!</TitleUser>
         </ContainerAdminProfile>
         <AdminNavBar>
-          <UserNavLink to="/user" onClick={() => handlerMenu()}>
+          <UserNavLink to={`/user/${userId}`} onClick={() => handlerMenu()}>
             Mis datos
           </UserNavLink>
           <UserNavLink to="/user/orders" onClick={() => handlerMenu()}>

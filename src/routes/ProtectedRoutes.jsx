@@ -1,24 +1,16 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-// receives component and any other props represented by ...rest
 export const ProtectedRoutes = ({ children }) => {
-  // const { isAuthenticated, loading, user } = useAuth();
+  const accessToken = localStorage.getItem('accessToken');
+  const userData = useSelector((state) => state.user); // Asegúrate de ajustar esto según tu estructura de estado.
 
-  // if (loading) return <h1>Loading...</h1>;
-
-  // const existData = localStorage.getItem('data');
-  // if (existData || user !== null) {
-  //   return children;
-  // } else {
-  //   <Navigate to="/login" replace />;
-  // }
-
-  // return <Outlet />;
-  const { isAuthenticated, loading } = useAuth();
-
-  if (loading) return <h1>Loading...</h1>;
-  if (!isAuthenticated && !loading) return <Navigate to="/login" replace />;
-  return <Outlet />;
+  if (accessToken && userData) {
+    // El usuario está autenticado, permite el acceso a la ruta.
+    return children;
+  } else {
+    // El usuario no está autenticado, redirige a la página de inicio de sesión.
+    return <Navigate to="/login" />;
+  }
 };

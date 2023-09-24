@@ -4,7 +4,7 @@ import {
   ContainerFormLogin,
   ContainerLogin,
   InputFormLogin,
-} from '../../Login/LoginStyles';
+} from '../../LoginPage/LoginStyles';
 
 export const LoginAdminHeader = styled.header`
   display: flex;

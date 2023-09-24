@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { ContainerFormLogin } from '../Login/LoginStyles';
+
+import { Field, Form } from 'formik';
 
 export const ContainerRegister = styled.div`
   display: flex;
@@ -34,7 +35,31 @@ export const ContainerImgRegister = styled.div`
   }
 `;
 
-export const ContainerFormRegister = styled(ContainerFormLogin)`
-  gap: 10px;
-  width: auto;
+export const FormContainer = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+export const RegisterInputs = styled(Field)`
+  padding: 8px;
+  background-color: #797979;
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    background-color: #f5f5f5;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 280px;
+  }
+`;
+
+export const ErrorMsg = styled.div`
+  color: red;
 `;

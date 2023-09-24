@@ -3,12 +3,11 @@ import { HeaderUser } from '../../components/Header/HeaderUser';
 import {
   BtnSubmit,
   Container,
-  ContainerFormLogin,
   ContainerLogin,
   InputFormLogin,
   LabelInputForm,
   TitleLogin,
-} from '../Login/LoginStyles';
+} from '../LoginPage/LoginStyles';
 import { Link } from 'react-router-dom';
 import { scrollToTop } from '../../App';
 
@@ -18,7 +17,7 @@ export const ForgotPassword = () => {
       <HeaderUser />
       <ContainerLogin>
         <TitleLogin>Reestablecer contraseña</TitleLogin>
-        <ContainerFormLogin>
+        <div>
           <Container>
             <LabelInputForm>ingrese una contraseña nueva</LabelInputForm>
             <InputFormLogin />
@@ -34,7 +33,7 @@ export const ForgotPassword = () => {
               ingresar con la nueva contraseña{' '}
             </BtnSubmit>
           </Link>
-        </ContainerFormLogin>
+        </div>
       </ContainerLogin>
     </>
   );

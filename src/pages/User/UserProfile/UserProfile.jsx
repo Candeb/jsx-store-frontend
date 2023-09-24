@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, IconButton } from '@mui/material';
-import { useAuth } from '../../../context/authContext';
+import { IconButton } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import axios from 'axios';
-import { UserMenu } from '../../../components/UserMenu/UserMenu';
+import { UserMenu } from '../../../components/User/UserMenu';
 import {
   ContainerInfoUser,
   ContainerSection,
@@ -17,45 +14,48 @@ import {
   DivImgUser,
   DataInfo,
 } from './UserProfileStyles';
-import {
-  ContainerTitleRoute,
-  TitleDashboard,
-} from '../../Admin/AdminDashboard/AdminDashboardStyles';
+import { ContainerTitleRoute } from '../../Admin/AdminDashboard/AdminDashboardStyles';
 import { FaEdit } from 'react-icons/fa';
 
-// export const fetchUserById = (id) => {
-//   const url = `https://jsx-store-api.onrender.com/auth/user/id/${id}`;
-//   return axios.get(url);
-// };
-
 export const UserProfile = () => {
-  const { isAuthenticated, logout, user } = useAuth();
-  console.log(isAuthenticated, user);
-
   const navigate = useNavigate();
 
-  const existData = localStorage.getItem('data');
+  const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    if (existData === null || user === null) {
-      return navigate('/login');
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3002/auth/user/id/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const userData = await response.json();
+        setUserData(userData);
+      } else {
+        // Manejar errores de obtención de datos del usuario
+      }
+    } catch (error) {
+      // Manejar errores de red
     }
-  }, []);
-
+  };
   const { id } = useParams();
-  // const { isLoading, isError, data, error } = useQuery({
-  //   queryKey: ['users', id],
-  //   queryFn: () => fetchUserById(id),
-  // });
-  console.log('user:', user);
+  useEffect(() => {
+    fetchUserData();
+  }, []); // Se ejecutará una vez cuando el componente se monte
 
-  // useEffect(() => {
-  //   fetchUserById(id);
-  // }, []);
+  if (!userData) {
+    return <div>Cargando datos del usuario...</div>;
+  }
 
   return (
     <UserContainer>
-      <UserMenu name={user.name} lastname={user.lastname} />
+      <UserMenu
+        name={userData.name}
+        lastname={userData.lastname}
+        userId={userData.id}
+      />
       <ContainerInfoUser>
         <ContainerTitleRoute>
           <TitleRouteUser> Mis datos </TitleRouteUser>
@@ -75,17 +75,17 @@ export const UserProfile = () => {
                 top: '10px',
                 right: '25px',
               }}
-              onClick={() => navigate(`/user/edit/${user.id}`)}
+              onClick={() => navigate(`/user/edit/${userData.id}`)}
             >
               <FaEdit />
             </IconButton>
           </DivImgUser>
-          <DataName> {user.name} </DataName>
+          <DataName> {userData.name} </DataName>
           <DataProfile>
             <DataInfo style={{ textTransform: 'capitalize' }}>
-              {user.name} {user.lastname}
+              {userData.name} {userData.lastname}
             </DataInfo>
-            <DataInfo> {user.email} </DataInfo>
+            <DataInfo> {userData.email} </DataInfo>
           </DataProfile>
         </ContainerSection>
       </ContainerInfoUser>

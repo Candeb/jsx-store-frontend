@@ -1,7 +1,5 @@
 import { Routes as ReactDomRoutes, Route } from 'react-router-dom';
 import { Home } from '../pages/Home/Home';
-import { Login } from '../pages/Login/Login';
-import { Register } from '../pages/Register/Register';
 import { ForgotPassword } from '../pages/ForgotPassword/ForgotPassword';
 import { Checkout } from '../pages/Checkout/Checkout';
 import { Sneakers } from '../pages/Sneakers/Sneakers';
@@ -13,12 +11,19 @@ import { AdminBrands } from '../pages/Admin/AdminBrands/AdminBrands';
 import { EditBrand } from '../pages/Edit/EditBrand';
 import { EditProduct } from '../pages/Edit/EditProduct';
 import { AdminOrders } from '../pages/Admin/AdminOrders/AdminOrders';
-import { UserProfile } from '../pages/User/UserProfile/UserProfile';
-import { ProtectedRoutes } from './ProtectedRoutes';
+
 import { UserOrders } from '../pages/User/UserOrders/UserOrders';
 import { EditProfileUser } from '../pages/Edit/EditProfileUser';
 
+import Login from '../pages/LoginPage/Login';
+import { useSelector } from 'react-redux';
+import * as userActions from '../redux/user/user-actions';
+import { ProtectedRoutes } from '../routes/ProtectedRoutes';
+import { UserProfile } from '../pages/User/UserProfile/UserProfile';
+import Register from '../pages/RegisterPage/Register';
+
 function Routes() {
+  const user = useSelector((state) => state.user.user);
   return (
     <ReactDomRoutes>
       <Route path="/" element={<Home />} />
@@ -26,11 +31,19 @@ function Routes() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/register" element={<Register />} />
-      <Route element={<ProtectedRoutes />}>
-        <Route path="/user" element={<UserProfile />} />
-        <Route path="/user/orders" element={<UserOrders />} />
-        <Route path="/user/edit/:id" element={<EditProfileUser />} />
-      </Route>
+
+      {/* Utiliza ProtectedRoute para proteger la ruta "/user" */}
+      <Route
+        path="/user/:id"
+        element={
+          <ProtectedRoutes>
+            <UserProfile />
+          </ProtectedRoutes>
+        }
+      />
+      <Route path="/user/edit/:id" element={<EditProfileUser />} />
+
+      <Route path="/user/orders" element={<UserOrders />} />
 
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/admin/login" element={<AdminLogin />} />

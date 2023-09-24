@@ -20,14 +20,21 @@ import { CartIcon } from './Cart/CartIcon';
 import { Link } from 'react-router-dom';
 import { scrollToTop } from '../../App';
 import { NavLinkItem } from '../NavLinkItem/NavLinkItem';
+import { useDispatch, useSelector } from 'react-redux';
+import * as userActions from '../../redux/user/user-actions';
 
 export const Header = () => {
   const [click, setClick] = useState(false);
+
+  const user = useSelector((state) => state.user.user); //accedemos a la informacion del usuario logeado.
+  // const dispatch = useDispatch();
 
   const handlerMenu = () => {
     setClick(!click);
     scrollToTop();
   };
+
+  // const menuHidden = useSelector((state) => state.user.hiddenMenu);
 
   return (
     <Container name="home" id="home">
@@ -40,7 +47,7 @@ export const Header = () => {
             />
           </LogoContainer>
         </Link>
-
+        {/* onClick={() => dispatch(userActions.hiddenMenu())} */}
         <NavBar click={click}>
           <NavLinkItem to="/" onClick={() => handlerMenu()}>
             {' '}

@@ -49,33 +49,11 @@ export const AuthProvider = ({ children }) => {
   //     }
   //   };
 
-  const login = async (user) => {
-    try {
-      const res = await loginRequest(user);
-      setUser(res.data);
-      setIsAuthenticated(true);
-      localStorage.setItem(
-        'data',
-        JSON.stringify({
-          user: res.data,
-        })
-      );
-      scrollToTop();
-
-      navigate(`/user`);
-    } catch (error) {
-      console.log(error);
-      // setErrors(error.response.data.message);
-    }
-  };
-
   const logout = () => {
     const auth = window.confirm(`¿Está seguro de que desea cerrar sesión?`);
     if (auth) {
-      Cookies.remove('token');
-      setUser(null);
-      setIsAuthenticated(false);
-      localStorage.removeItem('data');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('userId');
       navigate('/login');
     }
   };
@@ -109,7 +87,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         // signup,
-        login,
+
         logout,
         isAuthenticated,
         errors,

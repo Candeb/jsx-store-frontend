@@ -1,0 +1,9 @@
+export const USER_LOGIN = "USER_LOGIN";
+
+export const USER_LOGOUT = "USER_LOGOUT";
+
+export const OPEN_USER_MODAL = "OPEN_USER_MODAL";
+export const CLOSE_USER_MODAL = "CLOSE_USER_MODAL";
+export const DELETE_PROD_MODAL = "DELETE_PROD_MODAL";
+
+export const HIDDEN_MENU = "HIDDEN_MENU";

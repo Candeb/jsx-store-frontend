@@ -1,5 +1,5 @@
-import React from 'react';
-import { UserMenu } from '../../../components/UserMenu/UserMenu';
+import React, { useEffect } from 'react';
+import { UserMenu } from '../../../components/User/UserMenu';
 import {
   ContainerInfoUser,
   ContainerSection,
@@ -8,26 +8,42 @@ import {
   DivTriangUser,
 } from '../UserProfile/UserProfileStyles';
 import { ContainerTitleRoute } from '../../Admin/AdminDashboard/AdminDashboardStyles';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../../../context/authContext';
+import OrderList from './OrderList';
 
-// export const fetchUserById = (id) => {
-//   const url = `https://jsx-store-api.onrender.com/auth/user/id/${id}`;
-//   return axios.get(url);
-// };
+export async function fetchOrdersByUserId() {
+  const response = await fetch(
+    `https://jsx-store-api.onrender.com/order/active/user`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }
+  );
+  return response.json();
+}
 
 export const UserOrders = () => {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isLoading, data, error, isError } = useQuery(
+    'orders',
+    fetchOrdersByUserId
+  );
+
+  if (isLoading) return 'loading...';
+  if (isError) return `Error: ${error.message}`;
 
   return (
     <UserContainer>
-      <UserMenu name={user.name} lastname={user.lastname} />
+      <UserMenu />
       <ContainerInfoUser>
         <ContainerTitleRoute>
           <TitleRouteUser> Mis compras </TitleRouteUser>
           <DivTriangUser></DivTriangUser>
         </ContainerTitleRoute>
         <ContainerSection>
-          <p>ordenes aqui:</p>
+          <OrderList ordenes={data} />
         </ContainerSection>
       </ContainerInfoUser>
     </UserContainer>

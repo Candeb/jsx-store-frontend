@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, LogoContainer, MobileIcon, Wrapper } from './HeaderStyles';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export const HeaderUser = () => {
+  const user = useSelector((state) => state.user.user); //accedemos a la informacion del usuario logeado.
   return (
     <Container>
       <Wrapper>

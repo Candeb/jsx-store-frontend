@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import BtnShop from '../../components/Header/Cart/ModalCartStyles';
 import { ContainerTextSubs } from '../../components/Subscription/SubscriptionStyles';
+import { Field, Form } from 'formik';
 
 export const ContainerLogin = styled.div`
   color: white;
@@ -119,6 +120,7 @@ export const BtnSubmit = styled(BtnShop)`
   padding: 8px 20px;
   width: 320px;
   border: 1px solid #f5f5f5;
+  margin: 30px;
 
   &:hover {
     background-color: #f5f5f5;
@@ -128,4 +130,32 @@ export const BtnSubmit = styled(BtnShop)`
 
 export const ForgotPassword = styled(SubtitleLogin)`
   text-align: center;
+`;
+
+export const LoginForm = styled(Form)`
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LoginInputs = styled(Field)`
+  padding: 8px;
+  background-color: #797979;
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    background-color: #f5f5f5;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 280px;
+  }
 `;
