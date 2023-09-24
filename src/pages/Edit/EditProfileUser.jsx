@@ -9,11 +9,14 @@ import FormEditUser from '../../components/User/FormEditUser';
 import { ModalTitleStyled } from '../../components/AdminBrand/ModalFormBrands/ModalFormStyles';
 
 export async function fetchUser(id) {
-  const response = await fetch(`http://localhost:3002/auth/user/id/${id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-    },
-  });
+  const response = await fetch(
+    `https://jsx-store-api.onrender.com/auth/user/id/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }
+  );
   return response.json();
 }
 
