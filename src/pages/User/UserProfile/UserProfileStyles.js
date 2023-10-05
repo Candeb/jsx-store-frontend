@@ -36,6 +36,7 @@ export const ContainerSection = styled(ContainerDashboard)`
   flex-direction: column;
   border-radius: 30px;
   box-shadow: 0px 7px 20px inset #000000b8;
+  overflow: scroll;
 `;
 
 export const TitleUser = styled(TitleAdmin)`

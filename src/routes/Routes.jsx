@@ -45,7 +45,14 @@ function Routes() {
 
       <Route path="/user/orders" element={<UserOrders />} />
 
-      <Route path="/checkout" element={<Checkout />} />
+      <Route
+        path="/checkout"
+        element={
+          <ProtectedRoutes>
+            <Checkout />
+          </ProtectedRoutes>
+        }
+      />
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
       <Route path="/admin/users" element={<AdminUsers />} />

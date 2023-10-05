@@ -70,7 +70,15 @@ const ModalCart = () => {
                 </BtnCloseCart>
                 <BtnCloseCart disabled={!cartItems.length}>
                   <IoTrashOutline
-                    onClick={() => dispatch(cartActions.clearCart())}
+                    onClick={() => {
+                      const confirmClear = window.confirm(
+                        '¿Estás seguro de que deseas limpiar el carrito?'
+                      );
+                      if (confirmClear) {
+                        dispatch(cartActions.clearCart());
+                        window.alert('¡El carrito se ha limpiado con éxito!');
+                      }
+                    }}
                   />
                 </BtnCloseCart>
               </ContainerButtons>
@@ -120,9 +128,12 @@ const ModalCart = () => {
                 </ContainerTextInfo>
               </ContainerTotalCart>
 
-              <BtnShop onClick={scrollToTop} disabled={!cartItems.length}>
-                <Link to="/checkout">Continuar la compra </Link>
-              </BtnShop>
+              <Link to="/checkout">
+                {' '}
+                <BtnShop onClick={scrollToTop} disabled={!cartItems.length}>
+                  Continuar la compra{' '}
+                </BtnShop>
+              </Link>
             </ContainerCart>
           </ContainerCartWrapper>
         )}

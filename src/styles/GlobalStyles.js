@@ -18,5 +18,10 @@ export const GlobalStyles = createGlobalStyle`
     }
     a {
         text-decoration: none;
+
+        &:hover{
+            text-decoration: none;
+            color: white;
+        }
     }
 `;

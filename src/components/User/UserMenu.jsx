@@ -5,13 +5,12 @@ import {
   ImgLogoMenuAdmin,
   MenuIconAdmin,
   IconsMenu,
-  AdminNavLinkMobile,
   ContainerMenu,
 } from '../../pages/Admin/AdminDashboard/AdminDashboardStyles';
 import { scrollToTop } from '../../App';
-import { IoCloseOutline, IoMenuOutline } from 'react-icons/io5';
+import { IoCloseOutline } from 'react-icons/io5';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
-import { AiFillHome, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
 import { GiConverseShoe } from 'react-icons/gi';
 import { FiLogOut } from 'react-icons/fi';
 import { MobileIcon } from '../Header/HeaderStyles';
@@ -19,9 +18,10 @@ import { TitleUser } from '../../pages/User/UserProfile/UserProfileStyles';
 import { useAuth } from '../../context/authContext';
 import { UserNavLink } from './UserNavLink';
 import { ContainerUserNavBar, UserNavLinkMobile } from './UserMenuStyles';
+import { Link } from 'react-router-dom';
 
-export const UserMenu = ({ name, lastname }) => {
-  const { isAuthenticated, logout } = useAuth();
+export const UserMenu = ({ name }) => {
+  const { logout } = useAuth();
   const [click, setClick] = useState(false);
 
   const userId = localStorage.getItem('userId'); //obtener el ID del usuario
@@ -76,11 +76,12 @@ export const UserMenu = ({ name, lastname }) => {
             Cerrar sesión <FiLogOut />
           </button>
         </AdminNavBar>
-
-        <ImgLogoMenuAdmin
-          src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logofavicon.png?raw=true"
-          alt="Logo"
-        />
+        <Link to="/">
+          <ImgLogoMenuAdmin
+            src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logofavicon.png?raw=true"
+            alt="Logo"
+          />
+        </Link>
       </ContainerUserNavBar>{' '}
     </>
   );

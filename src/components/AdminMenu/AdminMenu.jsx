@@ -24,6 +24,7 @@ import { GiConverseShoe } from 'react-icons/gi';
 import { BiBadgeCheck } from 'react-icons/bi';
 import { FiUsers } from 'react-icons/fi';
 import { MobileIcon } from '../Header/HeaderStyles';
+import { Link } from 'react-router-dom';
 
 export const AdminMenu = () => {
   const [click, setClick] = useState(false);
@@ -90,10 +91,12 @@ export const AdminMenu = () => {
           </AdminNavLinkItem>
         </AdminNavBar>
 
-        <ImgLogoMenuAdmin
-          src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logofavicon.png?raw=true"
-          alt="Logo"
-        />
+        <Link to="/">
+          <ImgLogoMenuAdmin
+            src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logofavicon.png?raw=true"
+            alt="Logo"
+          />
+        </Link>
       </ContainerAdminNavBar>{' '}
     </>
   );

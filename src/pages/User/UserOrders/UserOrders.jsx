@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { UserMenu } from '../../../components/User/UserMenu';
 import {
   ContainerInfoUser,
@@ -9,8 +9,6 @@ import {
 } from '../UserProfile/UserProfileStyles';
 import { ContainerTitleRoute } from '../../Admin/AdminDashboard/AdminDashboardStyles';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
-import { useAuth } from '../../../context/authContext';
 import OrderList from './OrderList';
 
 export async function fetchOrdersByUserId() {
