@@ -116,7 +116,7 @@ export const TitleRoute = styled.p`
   height: 62px;
   display: flex;
   align-items: center;
-  width: 130px;
+  width: 145px;
   justify-content: center;
   color: white;
   font-size: 20px;

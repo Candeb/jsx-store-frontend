@@ -49,6 +49,7 @@ export const ContainerCart = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px 0px;
+  height: 100%;
 
   @media screen and (max-width: 450px) {
     width: 100%;
