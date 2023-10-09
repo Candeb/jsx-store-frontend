@@ -13,6 +13,7 @@ import {
   IoPersonOutline,
   IoMenuOutline,
   IoCloseOutline,
+  IoPerson,
 } from 'react-icons/io5';
 import ModalCart from './Cart/ModalCart';
 import * as cartActions from '../../redux/cart/cart-actions';
@@ -22,9 +23,12 @@ import { scrollToTop } from '../../App';
 import { NavLinkItem } from '../NavLinkItem/NavLinkItem';
 import { useDispatch, useSelector } from 'react-redux';
 import * as userActions from '../../redux/user/user-actions';
+import NameUser from '../User/NameUser';
 
 export const Header = () => {
   const [click, setClick] = useState(false);
+
+  const userId = localStorage.getItem('userId');
 
   const user = useSelector((state) => state.user.user); //accedemos a la informacion del usuario logeado.
   // const dispatch = useDispatch();
@@ -66,9 +70,9 @@ export const Header = () => {
 
           <ModalCart />
 
-          <Link to="/login">
+          <Link to={user ? `/user/${userId}` : '/login'}>
             <MenuIcon onClick={scrollToTop}>
-              <IoPersonOutline />
+              {userId ? <NameUser userId={userId} /> : <IoPersonOutline />}
             </MenuIcon>
           </Link>
 

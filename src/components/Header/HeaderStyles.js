@@ -111,6 +111,10 @@ export const Menu = styled.div`
   justify-content: center;
   align-items: center;
   height: 100px;
+
+  @media screen and (max-width: 500px) {
+    gap: 0;
+  }
 `;
 
 // contenedor icono cart

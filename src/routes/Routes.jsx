@@ -32,7 +32,6 @@ function Routes() {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/register" element={<Register />} />
 
-      {/* Utiliza ProtectedRoute para proteger la ruta "/user" */}
       <Route
         path="/user/:id"
         element={

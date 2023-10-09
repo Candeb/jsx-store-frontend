@@ -22,3 +22,12 @@ export const UserNavLinkMobile = styled(NavLink)`
     font-size: 21px;
   }
 `;
+
+export const UserName = styled.span`
+  font-size: 15px;
+  font-weight: 100;
+
+  @media screen and (max-width: 500px) {
+    font-size: 13px;
+  }
+`;

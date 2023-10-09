@@ -21,19 +21,24 @@ import { useAuth } from '../../context/authContext';
 import { scrollToTop } from '../../App';
 
 const Login = () => {
-  const [errorMsg, setErrorMsg] = useState(false); //hacemos un estado de manejo de true o false para mostrar un mensaje de error en color rojo.
+  const [errorMsg, setErrorMsg] = useState(false);
   const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.user.user); //se accede al estado del user , para verificar si se logeo. y si se logeo se redirecciona al home
+  const userLogin = useSelector((state) => state.user.user);
   const navigate = useNavigate();
 
-  setTimeout(() => {
-    const userId = localStorage.getItem('userId');
-    if (userLogin && userId) {
-      navigate(`/user/${userId}`);
+  useEffect(() => {
+    // Obtener la ruta anterior desde localStorage
+    const previousPath = localStorage.getItem('previousPath');
+
+    // Limpiar la ruta anterior de localStorage después de usarla si es necesario
+    if (previousPath) {
+      localStorage.removeItem('previousPath');
     }
-  }, 1000);
+  }, [userLogin, navigate]);
 
   const [signin, setSignin] = useState(false);
+
+  // Antes de redirigir al usuario a la página de inicio de sesión, guarda la ruta actual en localStorage
 
   return (
     <>
@@ -67,6 +72,7 @@ const Login = () => {
             ) {
               // Manejar error de inicio de sesión
               setErrorMsg(true);
+              // En el componente de inicio de sesión después del inicio de sesión exitoso
             } else if (loginUser) {
               const { name, role, accessToken } = loginUser;
               setSignin(true);
@@ -76,8 +82,15 @@ const Login = () => {
               // Reiniciar el formulario
               setSubmitting(false);
 
-              // Realizar alguna acción adicional, como redireccionar a la página de inicio, etc.
-              // console.log('datadd', response);
+              // Verificar si hay una ruta anterior en localStorage
+              const previousPath = localStorage.getItem('previousPath');
+
+              // Redirigir al usuario a la ruta anterior si existe, de lo contrario, a la página de inicio
+              if (previousPath) {
+                navigate(previousPath);
+              } else {
+                navigate('/');
+              }
             }
           }}
         >
