@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FormEditBrand = ({ onSubmit, initialValue }) => {
+  const navigate = useNavigate();
   const [brand, setBrand] = useState({
     name: initialValue.name || '',
     picture: initialValue.picture || '',
@@ -52,9 +54,28 @@ const FormEditBrand = ({ onSubmit, initialValue }) => {
     >
       {renderField('Nombre de la marca', 'name')}
       {renderField('Imagen de la marca', 'picture')}
-      <button className="btn btn-primary" type="submit">
-        Submit
-      </button>
+      <div
+        style={{
+          display: 'flex',
+          gap: '15px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <button
+          onClick={() => {
+            navigate('/admin/brands');
+          }}
+          className="btn btn-outline-secondary"
+        >
+          {' '}
+          Cancelar{' '}
+        </button>{' '}
+        <button className="btn btn-outline-success" type="submit">
+          Actualizar
+        </button>
+      </div>
     </form>
   );
 };

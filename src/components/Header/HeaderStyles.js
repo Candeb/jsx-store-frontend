@@ -113,7 +113,8 @@ export const Menu = styled.div`
   height: 100px;
 
   @media screen and (max-width: 500px) {
-    gap: 0;
+    gap: 5px;
+    margin-right: 10px;
   }
 `;
 

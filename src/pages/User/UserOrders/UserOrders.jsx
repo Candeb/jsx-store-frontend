@@ -10,6 +10,7 @@ import {
 import { ContainerTitleRoute } from '../../Admin/AdminDashboard/AdminDashboardStyles';
 import { useQuery } from 'react-query';
 import OrderList from './OrderList';
+import { Loader } from '../../../components/Loader/Loader';
 
 export async function fetchOrdersByUserId() {
   const response = await fetch(
@@ -29,7 +30,7 @@ export const UserOrders = () => {
     fetchOrdersByUserId
   );
 
-  if (isLoading) return 'loading...';
+  if (isLoading) return <Loader />;
   if (isError) return `Error: ${error.message}`;
 
   return (

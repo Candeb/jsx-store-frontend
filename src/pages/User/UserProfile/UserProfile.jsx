@@ -16,6 +16,7 @@ import {
 } from './UserProfileStyles';
 import { ContainerTitleRoute } from '../../Admin/AdminDashboard/AdminDashboardStyles';
 import { FaEdit } from 'react-icons/fa';
+import { Loader } from '../../../components/Loader/Loader';
 
 export const UserProfile = () => {
   const navigate = useNavigate();
@@ -49,7 +50,11 @@ export const UserProfile = () => {
   }, []); // Se ejecutará una vez cuando el componente se monte
 
   if (!userData) {
-    return <div>Cargando datos del usuario...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (

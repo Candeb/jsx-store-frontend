@@ -5,7 +5,7 @@ import {
   ModalTitleStyled,
 } from '../AdminBrand/ModalFormBrands/ModalFormStyles';
 import Modal from '@mui/material/Modal';
-import { useQuery, useQueryClient } from 'react-query';
+import useQuery from 'react-query';
 import { fetchProducts } from '../../pages/Admin/AdminProducts/AdminProducts';
 import { OpenModalProduct } from './OpenModalProduct';
 import { Loader } from '../Loader/Loader';
@@ -26,12 +26,11 @@ export const ModalOrderProduct = ({ message, description, productId }) => {
     fetchProducts();
   }, []);
 
-  // const queryClient = useQueryClient();
-  // const products = queryClient.getQueryData('products');
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  let products = [];
 
   let filteredProduct = products.filter((product) => product.id === productId);
   console.log(products);

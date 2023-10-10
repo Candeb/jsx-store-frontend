@@ -11,12 +11,7 @@ import { fetchUsers } from '../../pages/Admin/AdminUsers/AdminUsers';
 import { Loader } from '../Loader/Loader';
 
 export const ModalOrderUser = ({ message, description, userId }) => {
-  const { isLoading, data, error, isError } = useQuery('users', fetchUsers, {
-    onSuccess: (data) =>
-      console.log('Exito en la peticion de users en orders', data),
-    onError: (error) =>
-      console.log('Error en la peticion de users en orders', error),
-  });
+  const { isLoading, data, error, isError } = useQuery('users', fetchUsers);
 
   useEffect(() => {
     fetchUsers();
@@ -26,7 +21,7 @@ export const ModalOrderUser = ({ message, description, userId }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  let filteredUser = data.data.filter((user) => user.id === userId);
+  let filteredUser = data?.data?.filter((user) => user.id === userId);
 
   return (
     <div>

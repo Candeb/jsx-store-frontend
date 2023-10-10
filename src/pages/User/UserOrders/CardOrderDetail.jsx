@@ -9,6 +9,7 @@ import {
   OrderProductDescription,
   ContainerDetailOrderProduct,
 } from '../UserProfile/UserProfileStyles';
+import { Loader } from '../../../components/Loader/Loader';
 
 export default function CardOrderDetail({ productId }) {
   const fetchProduct = (id) => {
@@ -22,7 +23,12 @@ export default function CardOrderDetail({ productId }) {
   });
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return (
+      <div>
+        {' '}
+        <Loader />{' '}
+      </div>
+    );
   }
 
   if (isError) {

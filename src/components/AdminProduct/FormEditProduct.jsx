@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FormEditProduct = ({ onSubmit, initialValue }) => {
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState({
     name: initialValue.name || '',
     description: initialValue.description || '',
@@ -37,7 +40,7 @@ const FormEditProduct = ({ onSubmit, initialValue }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('productedit-->', product);
+
     onSubmit(product);
     setProduct({
       name: '',
@@ -67,10 +70,28 @@ const FormEditProduct = ({ onSubmit, initialValue }) => {
       {renderField('Stock del producto', 'available', 'boolean')}
       {renderField('ID de la marca del producto', 'brandsId', 'number')}
 
-      <button className="btn btn-outline-success" type="submit">
-        Submit
-      </button>
-      {/* <button className="btn btn-outline-secondary"> Cancelar </button> */}
+      <div
+        style={{
+          display: 'flex',
+          gap: '15px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <button
+          onClick={() => {
+            navigate('/admin/products');
+          }}
+          className="btn btn-outline-secondary"
+        >
+          {' '}
+          Cancelar{' '}
+        </button>{' '}
+        <button className="btn btn-outline-success" type="submit">
+          Actualizar
+        </button>
+      </div>
     </form>
   );
 };

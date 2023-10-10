@@ -7,6 +7,7 @@ import {
 import { UserMenu } from '../../components/User/UserMenu';
 import FormEditUser from '../../components/User/FormEditUser';
 import { ModalTitleStyled } from '../../components/AdminBrand/ModalFormBrands/ModalFormStyles';
+import { Loader } from '../../components/Loader/Loader';
 
 export async function fetchUser(id) {
   const response = await fetch(
@@ -55,7 +56,7 @@ export const EditProfileUser = () => {
     },
   });
 
-  if (isLoading) return 'loading...';
+  if (isLoading) return <Loader />;
   if (isError) return `Error: ${error.message}`;
 
   const handleSubmit = (updatedUser) => {
@@ -77,7 +78,7 @@ export const EditProfileUser = () => {
         >
           <ModalTitleStyled style={{ color: 'black' }}>
             {' '}
-            Editar marca
+            Editar mis datos
           </ModalTitleStyled>
           <FormEditUser onSubmit={handleSubmit} initialValue={user} />
         </ContainerInfoUser>

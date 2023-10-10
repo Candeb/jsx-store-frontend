@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { IoPerson } from 'react-icons/io5';
 import { ContainerCartIcon } from '../Header/HeaderStyles';
 import { UserName } from './UserMenuStyles';
+import { Loader } from '../Loader/Loader';
 
 export default function NameUser({ userId }) {
   const fetchUser = (id) => {
@@ -22,7 +23,12 @@ export default function NameUser({ userId }) {
   });
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return (
+      <div>
+        {' '}
+        <Loader />{' '}
+      </div>
+    );
   }
 
   if (isError) {
@@ -35,6 +41,10 @@ export default function NameUser({ userId }) {
   }
 
   const userDetail = data?.data;
+
+  if (!userDetail) {
+    return <div>No se encontraron detalles de usuario</div>;
+  }
 
   return (
     <ContainerCartIcon style={{ gap: '3px' }}>

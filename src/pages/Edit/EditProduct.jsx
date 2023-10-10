@@ -72,7 +72,7 @@ export const EditProduct = () => {
         >
           <ModalTitleStyled style={{ color: 'black' }}>
             {' '}
-            Editar marca
+            Editar producto
           </ModalTitleStyled>
           <FormEditProduct onSubmit={handleSubmit} initialValue={product} />
         </ContainerInfoAdmin>

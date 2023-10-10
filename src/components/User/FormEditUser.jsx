@@ -16,7 +16,9 @@ const FormEditUser = ({ onSubmit, initialValue }) => {
 
   const renderField = (label, name) => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-      <label style={{ fontWeight: '600', fontSize: '15px' }}>{label}</label>
+      <label style={{ fontWeight: '600', fontSize: '15px', minWidth: '60px' }}>
+        {label}
+      </label>
       <input
         onChange={handleChangeInput}
         name={name}
@@ -55,8 +57,12 @@ const FormEditUser = ({ onSubmit, initialValue }) => {
       {renderField('Nombre', 'name')}
       {renderField('Apellido', 'lastname')}
       {renderField('Email', 'email')}
-      <button className="btn btn-primary" type="submit">
-        Submit
+      <button
+        className="btn btn-primary"
+        style={{ marginTop: '10px' }}
+        type="submit"
+      >
+        Actualizar
       </button>
     </form>
   );
