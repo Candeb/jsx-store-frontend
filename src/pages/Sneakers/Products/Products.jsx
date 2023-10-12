@@ -16,38 +16,38 @@ import axios from 'axios';
 import { Loader } from '../../../components/Loader/Loader';
 
 export const fetchProducts = () => {
-  // const url = 'http://localhost:3002/product/products';
   const url = 'https://jsx-store-api.onrender.com/product/products';
   return axios.get(url);
 };
 
-export const Products = () => {
+export const Products = ({ selectedBrand, selectedCategory }) => {
   const { isLoading, data, error, isError } = useQuery(
     'products',
-    fetchProducts,
-    {
-      staleTime: 2000,
-      cacheTime: 5000,
-    }
+    fetchProducts
   );
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [limit, setLimit] = useState(INITIAL_LIMIT);
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts().then((response) => {
+      let products = response.data;
 
-  let products = useSelector((state) => state.products.products);
-  let totalProducts = products.length;
+      if (selectedBrand) {
+        products = products.filter(
+          (product) => product.brand === selectedBrand
+        );
+      }
 
-  const selectedCategory = useSelector(
-    (state) => state.categories.selectedCategory
-  );
-  if (selectedCategory) {
-    products = data?.data.filter(
-      (product) => product.categories === selectedCategory
-    );
-  }
-  const [limit, setLimit] = useState(INITIAL_LIMIT);
-  useEffect(() => setLimit(INITIAL_LIMIT), [selectedCategory]);
+      if (selectedCategory) {
+        products = products.filter(
+          (product) => product.categories === selectedCategory
+        );
+      }
+
+      setFilteredProducts(products);
+    });
+  }, [selectedBrand, selectedCategory]);
 
   return (
     <ContainerProducts id="sneakers" name="sneakers">
@@ -55,7 +55,7 @@ export const Products = () => {
         <TitleProducts> NUESTROS PRODUCTOS </TitleProducts>
         {isLoading && <Loader />}
         {isError && (
-          <h2 style={{ color: 'red', textAling: 'center' }}>
+          <h2 style={{ color: 'red', textAlign: 'center' }}>
             {' '}
             {error.message}{' '}
           </h2>
@@ -63,7 +63,7 @@ export const Products = () => {
         <ChosenCategory>{selectedCategory} </ChosenCategory>
       </ContainerTitles>
       <ContainerCardsProducts>
-        {data?.data.map((product, i) => {
+        {filteredProducts.map((product, i) => {
           if (limit > i) {
             return <CardProduct key={product.id} {...product} />;
           } else {
@@ -81,7 +81,7 @@ export const Products = () => {
           Ver menos
         </ButtonVer>
         <ButtonVer
-          disabled={totalProducts <= limit}
+          disabled={filteredProducts.length <= limit}
           onClick={() => setLimit(limit + INITIAL_LIMIT)}
         >
           Ver mas

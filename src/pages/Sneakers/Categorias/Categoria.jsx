@@ -3,21 +3,22 @@ import { CardCategoria, CardCategoriaImg, LinkAhref } from './CategoriasStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import * as categoriesActions from '../../../redux/categories/categories-actions';
 
-export const Categoria = (props) => {
-  const { id, name, picture } = props;
-
+export const Categoria = ({ id, name, setSelectedBrand, picture }) => {
   const selectedCategory = useSelector(
     (state) => state.categories.selectedCategory
   );
   const dispatch = useDispatch();
 
+  const handleCategoryClick = () => {
+    // Llama a setSelectedBrand para establecer la marca seleccionada
+    setSelectedBrand(name);
+  };
+
   return (
     <LinkAhref href="#sneakers">
       <CardCategoria
         selected={id === selectedCategory}
-        onClick={() => {
-          dispatch(categoriesActions.selectCategory(name));
-        }}
+        onClick={handleCategoryClick}
       >
         <CardCategoriaImg src={picture} alt={name} />
       </CardCategoria>

@@ -5,7 +5,7 @@ import {
   ModalTitleStyled,
 } from '../AdminBrand/ModalFormBrands/ModalFormStyles';
 import Modal from '@mui/material/Modal';
-import useQuery from 'react-query';
+import { useQuery } from 'react-query';
 import { fetchProducts } from '../../pages/Admin/AdminProducts/AdminProducts';
 import { OpenModalProduct } from './OpenModalProduct';
 import { Loader } from '../Loader/Loader';
