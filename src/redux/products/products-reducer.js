@@ -1,4 +1,7 @@
-import { fetchProducts } from '../../pages/Sneakers/Products/Products';
+const fetchProducts = () => {
+  const url = 'https://jsx-store-api.onrender.com/product/products';
+  return axios.get(url);
+};
 
 export const products = fetchProducts;
 
