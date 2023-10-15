@@ -13,7 +13,10 @@ import { CardProduct } from './CardProduct';
 
 export const Products = ({ products, selectedBrand }) => {
   const [limit, setLimit] = useState(INITIAL_LIMIT);
-  const productsData = products && products.data;
+
+  if (!products || !Array.isArray(products)) {
+    return <div>No hay datos disponibles.</div>;
+  }
 
   return (
     <ContainerProducts id="sneakers" name="sneakers">
@@ -22,14 +25,13 @@ export const Products = ({ products, selectedBrand }) => {
         <ChosenCategory>{selectedBrand} </ChosenCategory>
       </ContainerTitles>
       <ContainerCardsProducts>
-        {products &&
-          products.map((product, i) => {
-            if (limit > i) {
-              return <CardProduct key={product.id} {...product} />;
-            } else {
-              return null;
-            }
-          })}
+        {products.map((product, i) => {
+          if (limit > i) {
+            return <CardProduct key={product.id} {...product} />;
+          } else {
+            return null;
+          }
+        })}
       </ContainerCardsProducts>
       <ContainerButtons>
         {' '}
@@ -40,7 +42,7 @@ export const Products = ({ products, selectedBrand }) => {
           Ver menos
         </ButtonVer>
         <ButtonVer
-          disabled={productsData?.length <= limit}
+          disabled={products.length <= limit}
           onClick={() => setLimit(limit + INITIAL_LIMIT)}
         >
           Ver mas

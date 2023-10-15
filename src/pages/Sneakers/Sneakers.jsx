@@ -7,6 +7,9 @@ import axios from 'axios';
 import { Loader } from '../../components/Loader/Loader';
 
 export const Sneakers = () => {
+  const [filteredProducts, setFilteredProducts] = useState([]); // Estado de productos filtrados
+  const [selectedBrand, setSelectedBrand] = useState(null); // Estado de la marca seleccionada
+
   const fetchBrands = () => {
     const url = 'https://jsx-store-api.onrender.com/brand/allbrands';
     return axios.get(url);
@@ -31,15 +34,11 @@ export const Sneakers = () => {
     isError: isErrorProducts,
   } = useQuery('products', fetchProducts);
 
-  const [filteredProducts, setFilteredProducts] = useState([]); // Estado de productos filtrados
-  const [selectedBrand, setSelectedBrand] = useState(null); // Estado de la marca seleccionada
-
+  // Filtrar productos según brandId
   const handleCategoriaClick = (brandId) => {
-    // Filtrar productos según brandId
-    const filteredProducts =
-      products &&
-      products.data.filter((product) => product.brandsId === brandId);
-
+    const filteredProducts = products.data.filter(
+      (product) => product.brandsId === brandId
+    );
     setFilteredProducts(filteredProducts); // Actualizar el estado de productos filtrados
     setSelectedBrand(brands.data.find((brand) => brand.id === brandId).name); // Actualizar la marca seleccionada
   };
@@ -57,8 +56,10 @@ export const Sneakers = () => {
         <h2 style={{ color: 'red', textAlign: 'center' }}> {error.message} </h2>
       )}
       <Products
-        products={filteredProducts.length > 0 ? filteredProducts : products}
         selectedBrand={selectedBrand}
+        products={
+          filteredProducts.length > 0 ? filteredProducts : products.data
+        }
       />
     </>
   );
