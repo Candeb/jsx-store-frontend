@@ -35,29 +35,3 @@ export const login = async (email, password) => {
     return false;
   }
 };
-
-// export const validationUser = async (user) => {
-//   const { email, password } = user;
-//   const response = await fetch(
-//     'https://jsx-store-api.onrender.com/auth/login',
-//     {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({
-//         email: email,
-//         password: password,
-//       }),
-//     }
-//   );
-//   const status = response.status;
-
-//   const data = await response.json();
-//   console.log('token', data.accessToken);
-//   console.log('user', user);
-//   console.log('data', data);
-//   if (status === 200) {
-//     return { message: data.message, name: data.name, role: data.role };
-//   } else if (status === 400) {
-//     return { message: data.message };
-//   }
-// };

@@ -1,6 +1,6 @@
 import { Routes as ReactDomRoutes, Route } from 'react-router-dom';
 import { Home } from '../pages/Home/Home';
-import { ForgotPassword } from '../pages/ForgotPassword/ForgotPassword';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import { Checkout } from '../pages/Checkout/Checkout';
 import { Sneakers } from '../pages/Sneakers/Sneakers';
 import { AdminLogin } from '../pages/Admin/AdminLogin/AdminLogin';

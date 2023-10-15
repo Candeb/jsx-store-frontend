@@ -38,14 +38,11 @@ const Login = () => {
 
   const [signin, setSignin] = useState(false);
 
-  // Antes de redirigir al usuario a la página de inicio de sesión, guarda la ruta actual en localStorage
-
   return (
     <>
       <HeaderUser />
       <ContainerLogin>
         {' '}
-        <Link to="/admin/login"> Admin</Link>
         <TitleLogin>Ingresa a JSX STORE</TitleLogin>
         <ContainerSubtitleLogin>
           <p>Aún no tienes cuenta?</p>
@@ -124,6 +121,17 @@ const Login = () => {
             Olvidé mi contraseña
           </ForgotPassword>
         </Link>
+        <div
+          style={{ display: 'flex', justifyContent: 'start', width: '100%' }}
+        >
+          <Link
+            to="/admin/login"
+            style={{ color: '#797979', fontSize: '13px' }}
+          >
+            {' '}
+            Admin
+          </Link>
+        </div>
       </ContainerLogin>
     </>
   );
