@@ -112,6 +112,7 @@ export const ContainerButtons = styled.div`
 export const ButtonVer = styled(BtnShopCard)`
   width: 150px;
   padding: 10px;
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;

@@ -48,7 +48,7 @@ export const ContainerCardsCategorias = styled.div`
 
 export const CardCategoria = styled.div`
   padding: 20px;
-  background-color: ${({ selected }) => (selected ? 'black' : '#797979')};
+
   cursor: pointer;
   transition: 0.5s all ease;
   height: 122px;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  BtnVerMas,
   ContainerCardsFeatured,
   ContainerFeatured,
   TitleFeatured,
@@ -8,6 +9,8 @@ import { CardFeatured } from './CardFeatured';
 import { useQuery } from 'react-query';
 import { Loader } from '../Loader/Loader';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { scrollToTop } from '../../App';
 
 export const fetchProducts = () => {
   const url = 'https://jsx-store-api.onrender.com/product/products';
@@ -23,7 +26,8 @@ export const Featured = () => {
   const [randomProducts, setRandomProducts] = useState([]);
 
   useEffect(() => {
-    if (!isLoading && data) {
+    if (!isLoading && data && data.data) {
+      // Asegúrate de que data.data exista
       const allProducts = data.data;
       const randomIndices = [];
       while (randomIndices.length < 3) {
@@ -51,6 +55,13 @@ export const Featured = () => {
           <CardFeatured key={recomendado.id} {...recomendado} />
         ))}
       </ContainerCardsFeatured>
+      <Link
+        to="/sneakers"
+        onClick={scrollToTop}
+        style={{ zIndex: '1', marginTop: '1rem' }}
+      >
+        <BtnVerMas> ver todos los productos </BtnVerMas>
+      </Link>
     </ContainerFeatured>
   );
 };

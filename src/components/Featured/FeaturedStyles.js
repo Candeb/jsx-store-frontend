@@ -133,3 +133,18 @@ export const BtnShopCard = styled(BtnShop)`
     font-size: 11.5px;
   }
 `;
+
+export const BtnVerMas = styled(BtnShop)`
+  background: #cecece96;
+  z-index: 2;
+  border: none;
+  width: auto;
+  padding: 0.7rem 1rem;
+  transition: 0.8s all ease;
+  font-size: clamp(0.5rem, 5vw - 0.4rem, 1rem);
+
+  &:hover {
+    background: #cecece;
+    color: black;
+  }
+`;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ButtonVer,
   ChosenCategory,
@@ -13,6 +13,11 @@ import { CardProduct } from './CardProduct';
 
 export const Products = ({ products, selectedBrand }) => {
   const [limit, setLimit] = useState(INITIAL_LIMIT);
+
+  useEffect(() => {
+    // Resetea el límite cuando se cambia la categoría
+    setLimit(INITIAL_LIMIT);
+  }, [selectedBrand]);
 
   if (!products || !Array.isArray(products)) {
     return <div>No hay datos disponibles.</div>;
@@ -45,7 +50,7 @@ export const Products = ({ products, selectedBrand }) => {
           disabled={products.length <= limit}
           onClick={() => setLimit(limit + INITIAL_LIMIT)}
         >
-          Ver mas
+          Ver más
         </ButtonVer>
       </ContainerButtons>
     </ContainerProducts>

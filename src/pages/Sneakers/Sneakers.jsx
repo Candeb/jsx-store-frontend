@@ -44,16 +44,31 @@ export const Sneakers = () => {
     setSelectedBrand(brands.find((brand) => brand.id === brandId).name);
   };
 
+  const handleDeselectCategoriaClick = () => {
+    // Cuando se deselecciona una categoría, muestra todos los productos
+    setFilteredProducts([]);
+    setSelectedBrand(null);
+  };
+
   return (
     <>
       <Header />
       {isLoadingBrands && <Loader />}
       {isErrorBrands && (
-        <h2 style={{ color: 'red', textAlign: 'center' }}>
+        <h2
+          style={{
+            color: 'red',
+            textAlign: 'center',
+          }}
+        >
           {errorBrands.message}
         </h2>
       )}
-      <Categorias onCategoriaClick={handleCategoriaClick} brands={brands} />
+      <Categorias
+        onCategoriaClick={handleCategoriaClick}
+        onDeselectCategoriaClick={handleDeselectCategoriaClick}
+        brands={brands}
+      />
       {isLoadingProducts && <Loader />}
       {isErrorProducts && (
         <h2 style={{ color: 'red', textAlign: 'center' }}>
