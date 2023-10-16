@@ -27,7 +27,6 @@ export const Featured = () => {
 
   useEffect(() => {
     if (!isLoading && data && data.data) {
-      // Asegúrate de que data.data exista
       const allProducts = data.data;
       const randomIndices = [];
       while (randomIndices.length < 3) {
