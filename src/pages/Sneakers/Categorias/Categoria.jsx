@@ -3,7 +3,6 @@ import { CardCategoria, CardCategoriaImg, LinkAhref } from './CategoriasStyles';
 
 export const Categoria = ({ name, picture, brandId, onCategoriaClick }) => {
   const handleCategoriaClick = () => {
-    console.log('brandId de categoria', brandId);
     onCategoriaClick(brandId);
   };
 

@@ -7,12 +7,13 @@ import axios from 'axios';
 import { Loader } from '../../components/Loader/Loader';
 
 export const Sneakers = () => {
-  const [filteredProducts, setFilteredProducts] = useState([]); // Estado de productos filtrados
-  const [selectedBrand, setSelectedBrand] = useState(null); // Estado de la marca seleccionada
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState(null);
 
-  const fetchBrands = () => {
+  const fetchBrands = async () => {
     const url = 'https://jsx-store-api.onrender.com/brand/allbrands';
-    return axios.get(url);
+    const response = await axios.get(url);
+    return response.data; // Return data property of the response
   };
 
   const {
@@ -22,9 +23,10 @@ export const Sneakers = () => {
     isError: isErrorBrands,
   } = useQuery('brands', fetchBrands);
 
-  const fetchProducts = () => {
+  const fetchProducts = async () => {
     const url = 'https://jsx-store-api.onrender.com/product/products';
-    return axios.get(url);
+    const response = await axios.get(url);
+    return response.data; // Return data property of the response
   };
 
   const {
@@ -34,13 +36,12 @@ export const Sneakers = () => {
     isError: isErrorProducts,
   } = useQuery('products', fetchProducts);
 
-  // Filtrar productos según brandId
   const handleCategoriaClick = (brandId) => {
-    const filteredProducts = products.data.filter(
+    const filteredProducts = products.filter(
       (product) => product.brandsId === brandId
     );
-    setFilteredProducts(filteredProducts); // Actualizar el estado de productos filtrados
-    setSelectedBrand(brands.data.find((brand) => brand.id === brandId).name); // Actualizar la marca seleccionada
+    setFilteredProducts(filteredProducts);
+    setSelectedBrand(brands.find((brand) => brand.id === brandId).name);
   };
 
   return (
@@ -48,18 +49,20 @@ export const Sneakers = () => {
       <Header />
       {isLoadingBrands && <Loader />}
       {isErrorBrands && (
-        <h2 style={{ color: 'red', textAlign: 'center' }}> {error.message} </h2>
+        <h2 style={{ color: 'red', textAlign: 'center' }}>
+          {errorBrands.message}
+        </h2>
       )}
       <Categorias onCategoriaClick={handleCategoriaClick} brands={brands} />
       {isLoadingProducts && <Loader />}
       {isErrorProducts && (
-        <h2 style={{ color: 'red', textAlign: 'center' }}> {error.message} </h2>
+        <h2 style={{ color: 'red', textAlign: 'center' }}>
+          {errorProducts.message}
+        </h2>
       )}
       <Products
         selectedBrand={selectedBrand}
-        products={
-          filteredProducts.length > 0 ? filteredProducts : products.data
-        }
+        products={filteredProducts.length > 0 ? filteredProducts : products}
       />
     </>
   );

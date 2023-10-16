@@ -19,7 +19,7 @@ export const Categorias = ({ brands, onCategoriaClick }) => {
 
       <ContainerCardsCategorias>
         {brands &&
-          brands.data.map((brand) => (
+          brands.map((brand) => (
             <Categoria
               key={brand.id}
               name={brand.name}
