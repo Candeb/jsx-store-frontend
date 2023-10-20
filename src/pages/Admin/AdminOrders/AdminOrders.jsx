@@ -14,6 +14,9 @@ import { ModalOrderUser } from '../../../components/AdminOrder/ModalOrderUser';
 import { DeleteButtonOrder } from '../../../components/AdminOrder/DeleteButtonOrder';
 import { ModalOrderProduct } from '../../../components/AdminOrder/ModalOrderProduct';
 import { Box, Button } from '@mui/material';
+import OrderListAdmin from './OrderListAdmin';
+import BtnViewOrder from '../../../components/AdminOrder/BtnViewOrder';
+import { OrderUsername } from '../../../components/AdminOrder/OrderUsername';
 
 export const fetchOrders = () => {
   const url = 'https://jsx-store-api.onrender.com/order/orders';
@@ -35,6 +38,28 @@ export const AdminOrders = () => {
     fetchOrders();
   }, []);
 
+  const formatDate = (isoDate) => {
+    const fecha = new Date(isoDate);
+    const meses = [
+      'enero',
+      'febrero',
+      'marzo',
+      'abril',
+      'mayo',
+      'junio',
+      'julio',
+      'agosto',
+      'septiembre',
+      'octubre',
+      'noviembre',
+      'diciembre',
+    ];
+    const dia = fecha.getDate();
+    const mes = meses[fecha.getMonth()];
+    const anio = fecha.getFullYear();
+    return `${dia} de ${mes} de ${anio}`;
+  };
+
   return (
     <AdminContainer>
       <AdminMenu />
@@ -53,6 +78,7 @@ export const AdminOrders = () => {
                 <th>ID</th>
                 <th>userId</th>
                 <th>status</th>
+                <th>fecha</th>
                 <th>products</th>
                 <th>Acciones</th>
               </tr>
@@ -64,22 +90,12 @@ export const AdminOrders = () => {
                   <tr key={order.id}>
                     <td style={{ verticalAlign: 'inherit' }}>{order.id}</td>
                     <td style={{ verticalAlign: 'inherit' }}>
-                      <ModalOrderUser
-                        message={`Usuario ID ${order.userId}`}
-                        description={`Aqui puedes ver los detalles del usuario ${order.userId}`}
-                        userId={order.userId}
-                      />
+                      <OrderUsername userId={order.userId} />
                     </td>
                     <td>{order.status}</td>
+                    <td>{formatDate(order.created_at)}</td>
                     <td style={{ verticalAlign: 'inherit' }}>
-                      {order.products.map((orderItem) => (
-                        <ModalOrderProduct
-                          key={orderItem.id}
-                          message={`Producto ID ${orderItem.productId}`}
-                          description={`Aqui puedes ver los detalles del producto ${orderItem.productId}`}
-                          productId={orderItem.productId}
-                        />
-                      ))}
+                      <BtnViewOrder ordenes={data} />
                     </td>
                     <td
                       style={{
