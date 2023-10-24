@@ -76,10 +76,10 @@ export const AdminOrders = () => {
             <thead className="thead-dark">
               <tr>
                 <th>ID</th>
-                <th>userId</th>
-                <th>status</th>
-                <th>fecha</th>
-                <th>products</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Productos</th>
                 <th>Acciones</th>
               </tr>
             </thead>
