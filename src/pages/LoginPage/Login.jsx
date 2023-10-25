@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as userActions from '../../redux/user/user-actions';
 import { Formik } from 'formik';
-import { login, loginSchema } from './loginSchema';
+import { loginSchema, login } from './loginSchema';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { HeaderUser } from '../../components/Header/HeaderUser';
@@ -17,7 +17,6 @@ import {
   ForgotPassword,
   BtnSubmit,
 } from './LoginStyles';
-import { useAuth } from '../../context/authContext';
 import { scrollToTop } from '../../App';
 
 const Login = () => {
@@ -27,10 +26,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Obtener la ruta anterior desde localStorage
     const previousPath = localStorage.getItem('previousPath');
 
-    // Limpiar la ruta anterior de localStorage después de usarla si es necesario
     if (previousPath) {
       localStorage.removeItem('previousPath');
     }
@@ -42,11 +39,9 @@ const Login = () => {
     <>
       <HeaderUser />
       <ContainerLogin>
-        {' '}
         <TitleLogin>Ingresa a JSX STORE</TitleLogin>
         <ContainerSubtitleLogin>
           <p>Aún no tienes cuenta?</p>
-
           <Link to="/register">
             <SubtitleLogin> CREAR </SubtitleLogin>
           </Link>
@@ -56,38 +51,41 @@ const Login = () => {
             email: '',
             password: '',
           }}
-          login={loginSchema}
+          validationSchema={loginSchema}
           onSubmit={async (values, { setSubmitting }) => {
             const { email, password } = values;
 
-            // Realiza el inicio de sesión
             const loginUser = await login(email, password);
 
             if (
               loginUser &&
               loginUser.message === 'contraseña y/o usuario incorrecto.'
             ) {
-              // Manejar error de inicio de sesión
               setErrorMsg(true);
-              // En el componente de inicio de sesión después del inicio de sesión exitoso
             } else if (loginUser) {
               const { name, role, accessToken } = loginUser;
               setSignin(true);
-              // Almacenar el usuario en el estado global o local
               dispatch(userActions.userLogin(name, role, accessToken));
-
-              // Reiniciar el formulario
               setSubmitting(false);
 
-              // Verificar si hay una ruta anterior en localStorage
-              const previousPath = localStorage.getItem('previousPath');
+              console.log('Role:', role); // Agregar un console.log para verificar el valor del rol
 
-              // Redirigir al usuario a la ruta anterior si existe, de lo contrario, a la página de inicio
-              if (previousPath) {
-                navigate(previousPath);
-              } else {
-                navigate('/');
+              // Redirect based on user's role
+              if (role === 'USER') {
+                const previousPath = localStorage.getItem('previousPath');
+                if (previousPath) {
+                  console.log('Redirecting to previous path:', previousPath);
+                  navigate(previousPath);
+                } else {
+                  console.log('Redirecting to home page');
+                  navigate('/');
+                }
+              } else if (role === 'ADMIN') {
+                console.log('Redirecting to admin dashboard');
+                navigate('/admin/dashboard');
               }
+            } else {
+              console.log('loginUser is null or undefined');
             }
           }}
         >
@@ -97,12 +95,10 @@ const Login = () => {
                 <LabelInputForm htmlFor="email">Email:</LabelInputForm>
                 <LoginInputs type="email" name="email" autoFocus required />
               </Container>
-
               <Container>
                 <LabelInputForm htmlFor="password">contraseña:</LabelInputForm>
                 <LoginInputs type="password" name="password" required />
               </Container>
-
               <BtnSubmit type="submit" disabled={isSubmitting}>
                 Enviar
               </BtnSubmit>

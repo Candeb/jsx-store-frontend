@@ -20,16 +20,12 @@ export const login = async (email, password) => {
 
   if (response.status === 200) {
     const data = await response.json();
-    const accessToken = data.accessToken;
-    const id = data.id;
-
-    console.log('data', data);
-
-    // Almacena el token de acceso en localStorage (o donde prefieras)
+    const { accessToken, id, role } = data;
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('userId', id);
+    localStorage.setItem('userRole', role);
 
-    return true; // Inicio de sesión exitoso
+    return data;
   } else {
     // Manejar errores de inicio de sesión
     return false;

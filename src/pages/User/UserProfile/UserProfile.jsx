@@ -17,6 +17,7 @@ import {
 import { ContainerTitleRoute } from '../../Admin/AdminDashboard/AdminDashboardStyles';
 import { FaEdit } from 'react-icons/fa';
 import { Loader } from '../../../components/Loader/Loader';
+import { useSelector } from 'react-redux';
 
 export const UserProfile = () => {
   const navigate = useNavigate();

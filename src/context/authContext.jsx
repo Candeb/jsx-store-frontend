@@ -3,7 +3,6 @@ import { createContext, useContext, useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { scrollToTop } from '../App';
 
 export const loginRequest = async (user) =>
   axios.post(`https://jsx-store-api.onrender.com/auth/login`, user);
@@ -26,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  // clear errors after 5 seconds
+
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -36,24 +35,12 @@ export const AuthProvider = ({ children }) => {
     }
   }, [errors]);
 
-  //   const signup = async (user) => {
-  //     try {
-  //       const res = await registerRequest(user);
-  //       if (res.status === 200) {
-  //         setUser(res.data);
-  //         setIsAuthenticated(true);
-  //       }
-  //     } catch (error) {
-  //       console.log(error.response.data);
-  //       setErrors(error.response.data.message);
-  //     }
-  //   };
-
   const logout = () => {
     const auth = window.confirm(`¿Está seguro de que desea cerrar sesión?`);
     if (auth) {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('userId');
+      localStorage.removeItem('userRole');
       navigate('/login');
     }
   };
@@ -86,8 +73,6 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        // signup,
-
         logout,
         isAuthenticated,
         errors,

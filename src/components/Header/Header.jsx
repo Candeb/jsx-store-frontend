@@ -18,27 +18,23 @@ import {
 import ModalCart from './Cart/ModalCart';
 import * as cartActions from '../../redux/cart/cart-actions';
 import { CartIcon } from './Cart/CartIcon';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { scrollToTop } from '../../App';
 import { NavLinkItem } from '../NavLinkItem/NavLinkItem';
-import { useDispatch, useSelector } from 'react-redux';
-import * as userActions from '../../redux/user/user-actions';
+import { useSelector } from 'react-redux';
 import NameUser from '../User/NameUser';
 
 export const Header = () => {
   const [click, setClick] = useState(false);
-
   const userId = localStorage.getItem('userId');
+  const userRole = localStorage.getItem('userRole'); // Obtener el rol del usuario desde localStorage
 
-  const user = useSelector((state) => state.user.user); //accedemos a la informacion del usuario logeado.
-  // const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
   const handlerMenu = () => {
     setClick(!click);
     scrollToTop();
   };
-
-  // const menuHidden = useSelector((state) => state.user.hiddenMenu);
 
   return (
     <Container name="home" id="home">
@@ -51,7 +47,7 @@ export const Header = () => {
             />
           </LogoContainer>
         </Link>
-        {/* onClick={() => dispatch(userActions.hiddenMenu())} */}
+
         <NavBar click={click}>
           <NavLinkItem to="/" onClick={() => handlerMenu()}>
             {' '}
@@ -70,9 +66,17 @@ export const Header = () => {
 
           <ModalCart />
 
-          <Link to={user ? `/user/${userId}` : '/login'}>
+          <Link
+            to={
+              userRole === 'ADMIN'
+                ? '/admin/dashboard'
+                : userId
+                ? `/user/${userId}`
+                : '/login'
+            }
+          >
             <MenuIcon onClick={scrollToTop}>
-              {userId ? <NameUser userId={userId} /> : <IoPersonOutline />}
+              {user ? <NameUser userId={userId} /> : <IoPersonOutline />}
             </MenuIcon>
           </Link>
 

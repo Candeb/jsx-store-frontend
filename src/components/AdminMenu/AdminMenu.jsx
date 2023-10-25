@@ -13,20 +13,22 @@ import {
 } from '../../pages/Admin/AdminDashboard/AdminDashboardStyles';
 import { AdminNavLinkItem } from './AdminNavLinkItem';
 import { scrollToTop } from '../../App';
-import { IoCloseOutline, IoMenuOutline } from 'react-icons/io5';
+import { IoCloseOutline } from 'react-icons/io5';
 import {
   BsFillArrowRightCircleFill,
   BsFillClipboard2CheckFill,
 } from 'react-icons/bs';
+import { FiLogOut } from 'react-icons/fi';
 import { AiFillHome } from 'react-icons/ai';
-import { GrUserAdmin } from 'react-icons/gr';
 import { GiConverseShoe } from 'react-icons/gi';
 import { BiBadgeCheck } from 'react-icons/bi';
 import { FiUsers } from 'react-icons/fi';
 import { MobileIcon } from '../Header/HeaderStyles';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 
 export const AdminMenu = () => {
+  const { logout } = useAuth();
   const [click, setClick] = useState(false);
 
   const handlerMenu = () => {
@@ -60,6 +62,9 @@ export const AdminMenu = () => {
             <AdminNavLinkMobile to="/admin/orders">
               <BsFillClipboard2CheckFill />
             </AdminNavLinkMobile>
+            <button onClick={() => logout()}>
+              <FiLogOut />
+            </button>
           </IconsMenu>
           <ImgLogoMenuAdmin
             style={{ height: '30px' }}
@@ -71,7 +76,7 @@ export const AdminMenu = () => {
       <ContainerAdminNavBar>
         <ContainerAdminProfile>
           <ImgAdmin src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/iconadmin.png?raw=true" />
-          <TitleAdmin>Bienvenido, admin!</TitleAdmin>
+          <TitleAdmin>Hola, Admin!</TitleAdmin>
         </ContainerAdminProfile>
         <AdminNavBar>
           <AdminNavLinkItem to="/admin/dashboard" onClick={() => handlerMenu()}>
@@ -89,6 +94,9 @@ export const AdminMenu = () => {
           <AdminNavLinkItem to="/admin/orders" onClick={() => handlerMenu()}>
             Ordenes
           </AdminNavLinkItem>
+          <button onClick={() => logout()}>
+            Cerrar sesión <FiLogOut />
+          </button>
         </AdminNavBar>
 
         <Link to="/">
