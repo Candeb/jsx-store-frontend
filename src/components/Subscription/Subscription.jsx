@@ -12,24 +12,33 @@ import {
 
 export const Subscription = () => {
   return (
-    <ContainerSubs name="suscribe" id="suscribe">
-      <ContainerTextSubs>
-        <TitleSubs>-10% EN TU PRIMER PEDIDO</TitleSubs>
-        <DescCardProduct>
-          {' '}
-          Ingresa tu email para recibir novedades exclusivas, actualizaciones y
-          mucho más.{' '}
-        </DescCardProduct>
-      </ContainerTextSubs>
-      <ContainerFormSubs>
-        <FormSubs>
-          <InputEmail placeholder="Ingresa tu email" />
-          <BtnSubmit> Suscribirme </BtnSubmit>
+    <>
+      <div
+        name="suscribe"
+        id="suscribe"
+        style={{ backgroundColor: 'rgb(21, 11, 4)', height: '50px' }}
+      >
+        {' '}
+      </div>
+      <ContainerSubs>
+        <ContainerTextSubs>
+          <TitleSubs>10% OFF EN TU PRIMER PEDIDO</TitleSubs>
           <DescCardProduct>
-            Al suscribirte, aceptas nuestra Política de Privacidad.
+            {' '}
+            Ingresa tu email para recibir novedades exclusivas, actualizaciones
+            y mucho más.{' '}
           </DescCardProduct>
-        </FormSubs>
-      </ContainerFormSubs>
-    </ContainerSubs>
+        </ContainerTextSubs>
+        <ContainerFormSubs>
+          <FormSubs>
+            <InputEmail placeholder="Ingresa tu email" />
+            <BtnSubmit> Suscribirme </BtnSubmit>
+            <DescCardProduct>
+              Al suscribirte, aceptas nuestra Política de Privacidad.
+            </DescCardProduct>
+          </FormSubs>
+        </ContainerFormSubs>
+      </ContainerSubs>
+    </>
   );
 };

@@ -6,17 +6,15 @@ import {
   MenuIcon,
   MobileIcon,
   NavBar,
-  NavBarLinks,
   Wrapper,
+  NavBarLinks,
 } from './HeaderStyles';
 import {
   IoPersonOutline,
   IoMenuOutline,
   IoCloseOutline,
-  IoPerson,
 } from 'react-icons/io5';
 import ModalCart from './Cart/ModalCart';
-import * as cartActions from '../../redux/cart/cart-actions';
 import { CartIcon } from './Cart/CartIcon';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { scrollToTop } from '../../App';
@@ -27,13 +25,27 @@ import NameUser from '../User/NameUser';
 export const Header = () => {
   const [click, setClick] = useState(false);
   const userId = localStorage.getItem('userId');
-  const userRole = localStorage.getItem('userRole'); // Obtener el rol del usuario desde localStorage
+  const userRole = localStorage.getItem('userRole');
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.user.user);
 
   const handlerMenu = () => {
     setClick(!click);
     scrollToTop();
+  };
+
+  const redirectToHomePageAndScrollToSuscribe = () => {
+    // Redirigir a la página de inicio
+    navigate('/');
+
+    // Esperar un momento antes de desplazarse a la sección con id "suscribe"
+    setTimeout(() => {
+      const suscribeSection = document.getElementById('suscribe');
+      if (suscribeSection) {
+        suscribeSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100); // Puedes ajustar el tiempo de espera si es necesario
   };
 
   return (
@@ -50,15 +62,21 @@ export const Header = () => {
 
         <NavBar click={click}>
           <NavLinkItem to="/" onClick={() => handlerMenu()}>
-            {' '}
-            Home{' '}
+            <span onClick={scrollToTop}> Home </span>
           </NavLinkItem>
 
           <NavLinkItem to="/sneakers" onClick={() => handlerMenu()}>
-            Sneakers
+            <span onClick={scrollToTop}> Sneakers </span>
           </NavLinkItem>
 
-          <NavBarLinks onClick={() => handlerMenu()}>Suscribite</NavBarLinks>
+          <NavBarLinks
+            onClick={() => {
+              handlerMenu(); // Llama a la función handlerMenu
+              redirectToHomePageAndScrollToSuscribe(); // Llama a la función para redirigir y desplazarte a la sección suscribe
+            }}
+          >
+            Suscribite
+          </NavBarLinks>
         </NavBar>
 
         <Menu>
@@ -74,6 +92,7 @@ export const Header = () => {
                 ? `/user/${userId}`
                 : '/login'
             }
+            onClick={scrollToTop}
           >
             <MenuIcon onClick={scrollToTop}>
               {user ? <NameUser userId={userId} /> : <IoPersonOutline />}

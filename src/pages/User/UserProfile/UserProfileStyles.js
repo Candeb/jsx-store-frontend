@@ -29,6 +29,15 @@ export const ContainerInfoUser = styled(ContainerInfoAdmin)`
   }
 `;
 
+export const ContainerSectionUser = styled.div`
+  background: rgb(21, 11, 4);
+  padding: 3.5rem 2.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
 export const ContainerSection = styled(ContainerDashboard)`
   display: flex;
   align-items: flex-start;
@@ -40,7 +49,7 @@ export const ContainerSection = styled(ContainerDashboard)`
   padding: 40px;
   flex-direction: column;
   border-radius: 30px;
-  overflow: scroll;
+  overflow-y: scroll;
 
   @media screen and (max-width: 550px) {
     width: 100%;
@@ -94,6 +103,7 @@ export const DataProfile = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 15px;
+  color: white;
 `;
 
 export const DivFlex = styled.div`
@@ -105,10 +115,12 @@ export const DataName = styled.p`
   text-align: center;
   text-transform: capitalize;
   font-weight: 700;
+  color: white;
 `;
 
 export const DataInfo = styled.p`
   font-size: 18px;
+  color: white;
 `;
 
 export const DivImgUser = styled.div`
@@ -123,9 +135,8 @@ export const DivImgUser = styled.div`
 
 export const ImgUser = styled.img`
   height: 130px;
-  overflow: hidden;
-  border-radius: 50%;
-  box-shadow: black 0px 1px 7px;
+
+  border-radius: 1rem;
 `;
 
 export const ContainerCardOrders = styled.div`

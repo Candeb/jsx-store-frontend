@@ -76,13 +76,16 @@ const Login = () => {
                 if (previousPath) {
                   console.log('Redirecting to previous path:', previousPath);
                   navigate(previousPath);
+                  scrollToTop();
                 } else {
                   console.log('Redirecting to home page');
                   navigate('/');
+                  scrollToTop();
                 }
               } else if (role === 'ADMIN') {
                 console.log('Redirecting to admin dashboard');
                 navigate('/admin/dashboard');
+                scrollToTop();
               }
             } else {
               console.log('loginUser is null or undefined');

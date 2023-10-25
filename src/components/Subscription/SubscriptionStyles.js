@@ -4,7 +4,6 @@ import { BtnShopCard } from '../Featured/FeaturedStyles';
 export const ContainerSubs = styled.div`
   background-color: #150b04;
   width: 100%;
-  min-height: 60vh;
   padding: 60px 0px;
   display: flex;
   align-items: center;

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { UserMenu } from '../../../components/User/UserMenu';
 import {
   ContainerInfoUser,
-  ContainerSection,
+  ContainerSectionUser,
   UserContainer,
   TitleRouteUser,
   DivTriangUser,
@@ -70,7 +70,7 @@ export const UserProfile = () => {
           <TitleRouteUser> Mis datos </TitleRouteUser>
           <DivTriangUser></DivTriangUser>
         </ContainerTitleRoute>
-        <ContainerSection>
+        <ContainerSectionUser>
           <DivImgUser>
             {' '}
             <ImgUser src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/userimg.jpg?raw=true" />{' '}
@@ -83,6 +83,12 @@ export const UserProfile = () => {
                 fontSize: '20px',
                 top: '10px',
                 right: '25px',
+                '&:hover': {
+                  backgroundColor: 'black',
+                  color: 'white',
+                  border: '1px solid white',
+                  // Otros estilos de hover aquí
+                },
               }}
               onClick={() => navigate(`/user/edit/${userData.id}`)}
             >
@@ -96,7 +102,7 @@ export const UserProfile = () => {
             </DataInfo>
             <DataInfo> {userData.email} </DataInfo>
           </DataProfile>
-        </ContainerSection>
+        </ContainerSectionUser>
       </ContainerInfoUser>
     </UserContainer>
   );

@@ -5,7 +5,7 @@ export const NavLinkStyled = styled(NavLink)`
   font-size: 15px;
   list-style: none;
   cursor: pointer;
-
+  height: 100px;
   color: #f5f5f5;
   display: flex;
   align-items: center;
@@ -14,7 +14,7 @@ export const NavLinkStyled = styled(NavLink)`
 
   &.active {
     font-weight: 800;
-    text-transform: uppercase;
+    text-shadow: 2px 2px 2px red;
   }
 
   @media screen and (min-width: 961px) {
@@ -22,7 +22,6 @@ export const NavLinkStyled = styled(NavLink)`
       transition: 0.5s all ease;
     }
   }
-
   @media screen and (max-width: 960px) {
     font-size: 20px;
     width: 100%;
@@ -31,6 +30,15 @@ export const NavLinkStyled = styled(NavLink)`
     align-items: center;
     gap: 1px;
     flex-wrap: wrap;
-    height: 100px;
+
+    &:hover {
+      color: black;
+
+      background-color: #f5f5f5;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      transition: 0.5s all ease;
+    }
   }
 `;

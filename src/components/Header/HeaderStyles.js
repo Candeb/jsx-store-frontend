@@ -15,12 +15,11 @@ export const Container = styled.div`
 export const Wrapper = styled.header`
   gap: 15px;
   padding-left: 5%;
-  padding-right: 5%;
+  padding-right: 12%;
   display: flex;
   z-index: 999;
   width: 100vw;
   height: 100px;
-
   align-items: center;
   justify-content: space-between;
   position: fixed;
@@ -75,13 +74,6 @@ export const NavBarLinks = styled.li`
   align-items: center;
   gap: 20px;
   transition: 0.5s all ease;
-
-  @media screen and (min-width: 961px) {
-    &:hover {
-      transition: 0.5s all ease;
-      letter-spacing: 1px;
-    }
-  }
 
   @media screen and (max-width: 960px) {
     font-size: 20px;
