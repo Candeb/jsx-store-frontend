@@ -119,15 +119,7 @@ const Login = () => {
         </Link>
         <div
           style={{ display: 'flex', justifyContent: 'start', width: '100%' }}
-        >
-          <Link
-            to="/admin/login"
-            style={{ color: '#797979', fontSize: '13px' }}
-          >
-            {' '}
-            Admin
-          </Link>
-        </div>
+        ></div>
       </ContainerLogin>
     </>
   );
