@@ -49,14 +49,14 @@ const Register = () => {
             const saveUser = await registerUserFetch(createUser);
             if (saveUser === false) {
               //si el usuario existe se lo envia a la pagina de login
-              setMensaje('este usuario ya existe');
+              setMensaje('Este usuario ya existe');
               setTimeout(() => {
                 resetForm();
                 navigate('/login');
               }, '3000');
             } else {
               //si el usuario se registra exitosamente se lo envia a la pagina de login
-              setMensaje('usuario creado exitosamente');
+              setMensaje('Usuario creado exitosamente');
               setTimeout(() => {
                 resetForm();
                 setMensaje('');

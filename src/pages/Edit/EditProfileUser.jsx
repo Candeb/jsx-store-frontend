@@ -63,26 +63,31 @@ export const EditProfileUser = () => {
     updateUserMutation.mutate({ id, ...updatedUser });
   };
 
-  return (
-    <div>
-      <UserContainer>
-        <UserMenu />
-        <ContainerInfoUser
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            gap: '20px',
-          }}
-        >
-          <ModalTitleStyled style={{ color: 'black' }}>
-            {' '}
-            Editar mis datos
-          </ModalTitleStyled>
-          <FormEditUser onSubmit={handleSubmit} initialValue={user} />
-        </ContainerInfoUser>
-      </UserContainer>
-    </div>
-  );
+  if (user) {
+    return (
+      <div>
+        <UserContainer>
+          <UserMenu />
+          <ContainerInfoUser
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              gap: '20px',
+            }}
+          >
+            <ModalTitleStyled style={{ color: 'black' }}>
+              {' '}
+              Editar mis datos
+            </ModalTitleStyled>
+            <FormEditUser onSubmit={handleSubmit} initialValue={user} />
+          </ContainerInfoUser>
+        </UserContainer>
+      </div>
+    );
+  } else {
+    // Puedes mostrar un mensaje de carga aquí si lo deseas
+    return <Loader />;
+  }
 };

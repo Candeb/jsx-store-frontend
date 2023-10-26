@@ -18,6 +18,7 @@ import {
   BtnSubmit,
 } from './LoginStyles';
 import { scrollToTop } from '../../App';
+import { Loader } from '../../components/Loader/Loader';
 
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState(false);
@@ -68,22 +69,16 @@ const Login = () => {
               dispatch(userActions.userLogin(name, role, accessToken));
               setSubmitting(false);
 
-              console.log('Role:', role); // Agregar un console.log para verificar el valor del rol
-
-              // Redirect based on user's role
               if (role === 'USER') {
                 const previousPath = localStorage.getItem('previousPath');
                 if (previousPath) {
-                  console.log('Redirecting to previous path:', previousPath);
                   navigate(previousPath);
                   scrollToTop();
                 } else {
-                  console.log('Redirecting to home page');
                   navigate('/');
                   scrollToTop();
                 }
               } else if (role === 'ADMIN') {
-                console.log('Redirecting to admin dashboard');
                 navigate('/admin/dashboard');
                 scrollToTop();
               }
@@ -108,6 +103,7 @@ const Login = () => {
               {signin ? (
                 <p className="text-success">
                   Iniciaste sesión correctamente! Ingresando...
+                  <Loader />
                 </p>
               ) : (
                 <p className="text-danger">No has iniciado sesión</p>

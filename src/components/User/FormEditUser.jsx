@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const FormEditUser = ({ onSubmit, initialValue }) => {
   const [user, setUser] = useState({
@@ -6,6 +6,15 @@ const FormEditUser = ({ onSubmit, initialValue }) => {
     lastname: initialValue.lastname || '',
     email: initialValue.email || '',
   });
+
+  // Agrega un efecto para actualizar el estado cuando initialValue cambia
+  useEffect(() => {
+    setUser({
+      name: initialValue.name || '',
+      lastname: initialValue.lastname || '',
+      email: initialValue.email || '',
+    });
+  }, [initialValue]);
 
   const handleChangeInput = (e) => {
     setUser({
@@ -57,13 +66,28 @@ const FormEditUser = ({ onSubmit, initialValue }) => {
       {renderField('Nombre', 'name')}
       {renderField('Apellido', 'lastname')}
       {renderField('Email', 'email')}
-      <button
-        className="btn btn-primary"
-        style={{ marginTop: '10px' }}
-        type="submit"
+      <div
+        style={{
+          display: 'flex',
+          gap: '15px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          marginTop: '10px',
+        }}
       >
-        Actualizar
-      </button>
+        <button
+          onClick={() => {
+            navigate(`/user/${user.id}`);
+          }}
+          className="btn btn-outline-secondary"
+        >
+          Cancelar
+        </button>
+        <button className="btn btn-primary" type="submit">
+          Actualizar
+        </button>
+      </div>
     </form>
   );
 };

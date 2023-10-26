@@ -87,7 +87,6 @@ export const UserProfile = () => {
                   backgroundColor: 'black',
                   color: 'white',
                   border: '1px solid white',
-                  // Otros estilos de hover aquí
                 },
               }}
               onClick={() => navigate(`/user/edit/${userData.id}`)}

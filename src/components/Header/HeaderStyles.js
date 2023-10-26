@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const Wrapper = styled.header`
   gap: 15px;
   padding-left: 5%;
-  padding-right: 12%;
+  padding-right: 5%;
   display: flex;
   z-index: 999;
   width: 100vw;

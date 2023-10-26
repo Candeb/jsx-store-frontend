@@ -62,4 +62,11 @@ export const RegisterInputs = styled(Field)`
 
 export const ErrorMsg = styled.div`
   color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  max-width: 295px;
+  text-align: center;
+  font-size: 15px;
 `;

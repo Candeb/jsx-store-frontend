@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 
 export const loginSchema = yup.object().shape({
-  email: yup.string().email('email invalido').required('*completa este campo'),
-  password: yup.string().required('*complete este campo'),
+  email: yup.string().email('Email invalido').required('Completa este campo'),
+  password: yup.string().required('Completa este campo'),
 });
 
 // Inicio de sesión
