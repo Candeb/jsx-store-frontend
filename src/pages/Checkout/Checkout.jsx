@@ -29,8 +29,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatPrice } from '../../utils';
 import axios from 'axios';
 import * as cartActions from '../../redux/cart/cart-actions';
+import { scrollToTop } from '../../App';
 
 export const Checkout = () => {
+  const [isFormSaved, setIsFormSaved] = useState(false);
   const [billingDetails, setBillingDetails] = useState({
     nombre: '',
     apellido: '',
@@ -93,6 +95,12 @@ export const Checkout = () => {
   const shop = () => {
     dispatch(cartActions.clearCart());
     window.alert('¡Compra realizada con éxito!');
+    scrollToTop();
+  };
+
+  const handleSaveClick = (e) => {
+    e.preventDefault(); // Evitar la recarga de la página
+    setIsFormSaved(true);
   };
   return (
     <>
@@ -112,6 +120,7 @@ export const Checkout = () => {
                   name="nombre"
                   value={billingDetails.nombre}
                   onChange={handleBillingDetailsChange}
+                  disabled={isFormSaved}
                 />
               </ContainerInputSmall>
               <ContainerInputSmall>
@@ -122,6 +131,7 @@ export const Checkout = () => {
                   name="apellido"
                   value={billingDetails.apellido}
                   onChange={handleBillingDetailsChange}
+                  disabled={isFormSaved}
                 />
               </ContainerInputSmall>
             </ContainerInputBig>
@@ -133,6 +143,7 @@ export const Checkout = () => {
                 name="email"
                 value={billingDetails.email}
                 onChange={handleBillingDetailsChange}
+                disabled={isFormSaved}
               />
             </ContainerInputSmall>
             <ContainerInputBig>
@@ -144,6 +155,7 @@ export const Checkout = () => {
                   name="pais"
                   value={billingDetails.pais}
                   onChange={handleBillingDetailsChange}
+                  disabled={isFormSaved}
                 />
               </ContainerInputSmall>
               <ContainerInputSmall>
@@ -154,6 +166,7 @@ export const Checkout = () => {
                   name="ciudad"
                   value={billingDetails.ciudad}
                   onChange={handleBillingDetailsChange} //
+                  disabled={isFormSaved}
                 />
               </ContainerInputSmall>
             </ContainerInputBig>{' '}
@@ -166,6 +179,7 @@ export const Checkout = () => {
                   name="numero"
                   value={billingDetails.numero}
                   onChange={handleBillingDetailsChange} //
+                  disabled={isFormSaved}
                 />
               </ContainerInputSmall>
               <ContainerInputSmall>
@@ -178,6 +192,7 @@ export const Checkout = () => {
                   name="codigoPostal"
                   value={billingDetails.codigoPostal}
                   onChange={handleBillingDetailsChange}
+                  disabled={isFormSaved}
                 />
               </ContainerInputSmall>
             </ContainerInputBig>
@@ -188,6 +203,7 @@ export const Checkout = () => {
                 name="direccion"
                 value={billingDetails.direccion}
                 onChange={handleBillingDetailsChange} //
+                disabled={isFormSaved}
               />
             </ContainerInputSmall>
             <ContainerInputSmall>
@@ -201,6 +217,7 @@ export const Checkout = () => {
                     value="binance-pay"
                     checked={billingDetails.metodoPago === 'binance-pay'}
                     onChange={handleBillingDetailsChange} //
+                    disabled={isFormSaved}
                   />
                   <LabelInputBillingDetails for="binance-pay">
                     <ImgOption src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/payment/logo-binance.png?raw=true" />
@@ -214,6 +231,7 @@ export const Checkout = () => {
                     id="mercado-pago"
                     checked={billingDetails.metodoPago === 'binance-pay'}
                     onChange={handleBillingDetailsChange}
+                    disabled={isFormSaved}
                   />
                   <LabelInputBillingDetails for="mercado-pago">
                     <ImgOption src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/payment/logo-mercadopago.png?raw=true" />
@@ -227,6 +245,7 @@ export const Checkout = () => {
                     value="pay-pal"
                     checked={billingDetails.metodoPago === 'binance-pay'}
                     onChange={handleBillingDetailsChange}
+                    disabled={isFormSaved}
                   />
                   <LabelInputBillingDetails for="pay-pal">
                     <ImgOption src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/payment/logo-Paypal.png?raw=true" />
@@ -234,7 +253,7 @@ export const Checkout = () => {
                 </ContainerInputBig>
               </ContainerPaymentOptions>
             </ContainerInputSmall>
-            <BtnSave>Guardar</BtnSave>
+            <BtnSave onClick={(e) => handleSaveClick(e)}>Guardar</BtnSave>
           </FormBillingDetails>
         </ContainerBillingDetails>
         <ContainerOrderSummary>

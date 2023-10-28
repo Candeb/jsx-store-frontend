@@ -26,6 +26,7 @@ export const UserNavLinkMobile = styled(NavLink)`
 export const UserName = styled.span`
   font-size: 15px;
   font-weight: 100;
+  text-transform: capitalize;
 
   @media screen and (max-width: 500px) {
     font-size: 13px;

@@ -1,12 +1,20 @@
 import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { IoPerson } from 'react-icons/io5';
+import { IoPersonOutline, IoPerson } from 'react-icons/io5';
 import { ContainerCartIcon } from '../Header/HeaderStyles';
 import { UserName } from './UserMenuStyles';
 import { Loader } from '../Loader/Loader';
 
 export default function NameUser({ userId }) {
+  if (!userId) {
+    return (
+      <ContainerCartIcon style={{ gap: '3px' }}>
+        <IoPersonOutline />
+      </ContainerCartIcon>
+    );
+  }
+
   const fetchUser = (id) => {
     const url = `https://jsx-store-api.onrender.com/auth/user/id/${id}`;
     const config = {
@@ -25,8 +33,7 @@ export default function NameUser({ userId }) {
   if (isLoading) {
     return (
       <div>
-        {' '}
-        <Loader />{' '}
+        <Loader />
       </div>
     );
   }
@@ -35,7 +42,6 @@ export default function NameUser({ userId }) {
     return <div>Error: {error.message}</div>;
   }
 
-  // Verifica si data es undefined antes de acceder a sus propiedades
   if (!data) {
     return <div>No se encontraron datos</div>;
   }

@@ -12,7 +12,7 @@ export const registerSchema = yup.object().shape({
     .string()
     .matches(
       passwordRegx,
-      'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'
+      'La contraseña debe contener mínimo 8 caracteres: al menos una letra mayúscula, una letra minúscula y un número'
     ),
   repeatPassword: yup
     .string()

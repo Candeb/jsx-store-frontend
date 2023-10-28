@@ -69,25 +69,33 @@ const Login = () => {
               dispatch(userActions.userLogin(name, role, accessToken));
               setSubmitting(false);
 
-              if (role === 'USER') {
-                const previousPath = localStorage.getItem('previousPath');
-                if (previousPath) {
-                  navigate(previousPath);
-                  scrollToTop();
-                } else {
-                  navigate('/');
+              setTimeout(async () => {
+                setSignin(true);
+                dispatch(userActions.userLogin(name, role, accessToken));
+                setSubmitting(false);
+
+                if (role === 'USER') {
+                  const previousPath = localStorage.getItem('previousPath');
+                  if (previousPath) {
+                    navigate(previousPath);
+                    scrollToTop();
+                  } else {
+                    navigate('/');
+                    scrollToTop();
+                  }
+                } else if (role === 'ADMIN') {
+                  navigate('/admin/dashboard');
                   scrollToTop();
                 }
-              } else if (role === 'ADMIN') {
-                navigate('/admin/dashboard');
-                scrollToTop();
-              }
+              }, 500);
             } else {
-              console.log('loginUser is null or undefined');
+              setErrorMsg(
+                'La contraseña y/o el usuario es incorrecto. Intenta nuevamente.'
+              );
             }
           }}
         >
-          {({ errors, touched, isSubmitting }) => (
+          {({ isSubmitting }) => (
             <LoginForm>
               <Container>
                 <LabelInputForm htmlFor="email">Email:</LabelInputForm>
@@ -101,12 +109,14 @@ const Login = () => {
                 Enviar
               </BtnSubmit>
               {signin ? (
-                <p className="text-success">
+                <div className="text-success">
                   Iniciaste sesión correctamente! Ingresando...
                   <Loader />
-                </p>
+                </div>
+              ) : errorMsg ? (
+                <div className="text-danger">{errorMsg}</div>
               ) : (
-                <p className="text-danger">No has iniciado sesión</p>
+                <div className="text-danger">No has iniciado sesión</div>
               )}
             </LoginForm>
           )}
