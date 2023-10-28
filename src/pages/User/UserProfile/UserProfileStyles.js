@@ -31,11 +31,19 @@ export const ContainerInfoUser = styled(ContainerInfoAdmin)`
 
 export const ContainerSectionUser = styled.div`
   background: rgb(21, 11, 4);
-  padding: 3.5rem 2.5rem;
+
+  padding: 2rem 3rem;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 750px) {
+    height: 85%;
+    padding: 1rem 2.5rem;
+  }
 `;
 
 export const ContainerSection = styled(ContainerDashboard)`

@@ -71,18 +71,20 @@ export const UserProfile = () => {
           <DivTriangUser></DivTriangUser>
         </ContainerTitleRoute>
         <ContainerSectionUser>
-          <DivImgUser>
-            {' '}
-            <ImgUser src="https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg" />{' '}
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+            }}
+          >
             <IconButton
               sx={{
-                position: 'absolute',
                 backgroundColor: '#f7f3d9',
                 border: '0.5px solid black',
                 color: 'black',
                 fontSize: '20px',
-                top: '10px',
-                right: '25px',
                 '&:hover': {
                   backgroundColor: 'black',
                   color: 'white',
@@ -93,6 +95,11 @@ export const UserProfile = () => {
             >
               <FaEdit />
             </IconButton>
+          </div>
+
+          <DivImgUser>
+            {' '}
+            <ImgUser src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/icon-user.png?raw=true" />{' '}
           </DivImgUser>
           <DataName> {userData.name} </DataName>
           <DataProfile>
