@@ -66,11 +66,13 @@ export const AdminMenu = () => {
               <FiLogOut />
             </button>
           </IconsMenu>
-          <ImgLogoMenuAdmin
-            style={{ height: '30px' }}
-            src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logofavicon.png?raw=true"
-            alt="Logo"
-          />
+          <Link to="/">
+            <ImgLogoMenuAdmin
+              style={{ height: '30px' }}
+              src="https://github.com/Candeb/jsx-store-frontend/blob/main/src/assets/logofavicon.png?raw=true"
+              alt="Logo"
+            />
+          </Link>
         </MenuIconAdmin>
       </ContainerMenu>
       <ContainerAdminNavBar>

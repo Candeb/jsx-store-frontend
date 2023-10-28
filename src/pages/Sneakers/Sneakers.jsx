@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Categorias } from './Categorias/Categorias';
 import { Products } from './Products/Products';
 import { Header } from '../../components/Header/Header';
@@ -13,7 +13,7 @@ export const Sneakers = () => {
   const fetchBrands = async () => {
     const url = 'https://jsx-store-api.onrender.com/brand/allbrands';
     const response = await axios.get(url);
-    return response.data; // Return data property of the response
+    return response.data;
   };
 
   const {
@@ -26,7 +26,7 @@ export const Sneakers = () => {
   const fetchProducts = async () => {
     const url = 'https://jsx-store-api.onrender.com/product/products';
     const response = await axios.get(url);
-    return response.data; // Return data property of the response
+    return response.data;
   };
 
   const {
@@ -44,8 +44,8 @@ export const Sneakers = () => {
     setSelectedBrand(brands.find((brand) => brand.id === brandId).name);
   };
 
+  // Cuando se deselecciona una categoría, muestra todos los productos
   const handleDeselectCategoriaClick = () => {
-    // Cuando se deselecciona una categoría, muestra todos los productos
     setFilteredProducts([]);
     setSelectedBrand(null);
   };
