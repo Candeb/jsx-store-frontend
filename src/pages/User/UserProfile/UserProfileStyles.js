@@ -41,8 +41,8 @@ export const ContainerSectionUser = styled.div`
   align-items: center;
 
   @media screen and (max-width: 750px) {
-    height: 85%;
-    padding: 1rem 2.5rem;
+    padding: 2rem;
+    width: 95%;
   }
 `;
 
@@ -112,6 +112,7 @@ export const DataProfile = styled.div`
   align-items: center;
   margin-top: 15px;
   color: white;
+  padding: 0px 1rem;
 `;
 
 export const DivFlex = styled.div`

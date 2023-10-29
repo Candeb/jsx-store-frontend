@@ -103,6 +103,7 @@ export const Menu = styled.div`
   justify-content: center;
   align-items: center;
   height: 100px;
+  margin-top: 1rem;
 
   @media screen and (max-width: 500px) {
     gap: 5px;

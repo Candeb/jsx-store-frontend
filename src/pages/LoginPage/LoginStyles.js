@@ -136,7 +136,7 @@ export const LoginForm = styled(Form)`
   padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
   background-color: black;
   justify-content: center;
   align-items: center;

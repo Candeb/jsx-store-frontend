@@ -16,7 +16,7 @@ import {
 } from 'react-icons/io5';
 import ModalCart from './Cart/ModalCart';
 import { CartIcon } from './Cart/CartIcon';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import { scrollToTop } from '../../App';
 import { NavLinkItem } from '../NavLinkItem/NavLinkItem';
 import { useSelector } from 'react-redux';
@@ -36,16 +36,13 @@ export const Header = () => {
   };
 
   const redirectToHomePageAndScrollToSuscribe = () => {
-    // Redirigir a la página de inicio
     navigate('/');
-
-    // Esperar un momento antes de desplazarse a la sección con id "suscribe"
     setTimeout(() => {
       const suscribeSection = document.getElementById('suscribe');
       if (suscribeSection) {
         suscribeSection.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 100); // Puedes ajustar el tiempo de espera si es necesario
+    }, 100);
   };
 
   return (
@@ -71,8 +68,8 @@ export const Header = () => {
 
           <NavBarLinks
             onClick={() => {
-              handlerMenu(); // Llama a la función handlerMenu
-              redirectToHomePageAndScrollToSuscribe(); // Llama a la función para redirigir y desplazarte a la sección suscribe
+              handlerMenu();
+              redirectToHomePageAndScrollToSuscribe();
             }}
           >
             Suscribite
