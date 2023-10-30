@@ -20,18 +20,6 @@ export const ContainerAdminNavBar = styled.aside`
   height: 100%;
 
   @media screen and (max-width: 960px) {
-    /* ;
-    
-    align-items: center;
-    background-color: black;
-    justify-content: flex-start;
-    gap: 0px;
-    
-    padding: 50px 0px;
-
-    & a {
-      width: 100vw;
-    } */
     display: none;
   }
 `;
@@ -50,6 +38,7 @@ export const AdminNavLink = styled(NavLink)`
   font-weight: 600;
   width: 100%;
   transition: 6s all ease;
+  cursor: pointer;
 
   &:hover {
     color: black;
@@ -64,6 +53,20 @@ export const AdminNavLink = styled(NavLink)`
     padding: 8px 15px 8px 5px;
     width: 100%;
     text-align: right;
+    transition: 6s all ease;
+  }
+`;
+
+export const AdminLogout = styled.span`
+  color: black;
+  font-weight: 600;
+  width: 100%;
+  transition: 6s all ease;
+  cursor: pointer;
+
+  &:hover {
+    color: black;
+    text-decoration: underline;
     transition: 6s all ease;
   }
 `;

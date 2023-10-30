@@ -14,7 +14,10 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { GiConverseShoe } from 'react-icons/gi';
 import { FiLogOut } from 'react-icons/fi';
 import { MobileIcon } from '../Header/HeaderStyles';
-import { TitleUser } from '../../pages/User/UserProfile/UserProfileStyles';
+import {
+  TitleUser,
+  UserLogout,
+} from '../../pages/User/UserProfile/UserProfileStyles';
 import { useAuth } from '../../context/authContext';
 import { UserNavLink } from './UserNavLink';
 import { ContainerUserNavBar, UserNavLinkMobile } from './UserMenuStyles';
@@ -49,9 +52,12 @@ export const UserMenu = ({ name }) => {
               <GiConverseShoe />
             </UserNavLinkMobile>
 
-            <button onClick={() => logout()}>
+            <UserLogout
+              style={{ textAlign: 'center' }}
+              onClick={() => logout()}
+            >
               <FiLogOut />
-            </button>
+            </UserLogout>
           </IconsMenu>
           <Link to="/">
             <ImgLogoMenuAdmin
@@ -74,9 +80,9 @@ export const UserMenu = ({ name }) => {
             Mis compras
           </UserNavLink>
 
-          <button onClick={() => logout()}>
-            Cerrar sesión <FiLogOut />
-          </button>
+          <UserLogout style={{ color: 'black' }} onClick={() => logout()}>
+            Cerrar sesión <FiLogOut style={{ fontSize: '20px' }} />
+          </UserLogout>
         </AdminNavBar>
         <Link to="/">
           <ImgLogoMenuAdmin

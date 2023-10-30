@@ -2,12 +2,12 @@ import * as yup from 'yup';
 
 const passwordRegx = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
 export const registerSchema = yup.object().shape({
-  name: yup.string().required('Es obligatorio ingresar el nombre'),
-  lastname: yup.string().required('Es obligatorio ingresar el apellido'),
+  name: yup.string().required('Es obligatorio ingresar tu nombre'),
+  lastname: yup.string().required('Es obligatorio ingresar tu apellido'),
   email: yup
     .string()
-    .email('Email inválido')
-    .required('Es obligatorio ingresar el email'),
+    .email('El email no es válido')
+    .required('Es obligatorio ingresar tu email'),
   password: yup
     .string()
     .matches(

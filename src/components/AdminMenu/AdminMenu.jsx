@@ -10,6 +10,7 @@ import {
   IconsMenu,
   AdminNavLinkMobile,
   ContainerMenu,
+  AdminLogout,
 } from '../../pages/Admin/AdminDashboard/AdminDashboardStyles';
 import { AdminNavLinkItem } from './AdminNavLinkItem';
 import { scrollToTop } from '../../App';
@@ -62,9 +63,12 @@ export const AdminMenu = () => {
             <AdminNavLinkMobile to="/admin/orders">
               <BsFillClipboard2CheckFill />
             </AdminNavLinkMobile>
-            <button onClick={() => logout()}>
+            <AdminLogout
+              style={{ textAlign: 'center' }}
+              onClick={() => logout()}
+            >
               <FiLogOut />
-            </button>
+            </AdminLogout>
           </IconsMenu>
           <Link to="/">
             <ImgLogoMenuAdmin
@@ -96,9 +100,9 @@ export const AdminMenu = () => {
           <AdminNavLinkItem to="/admin/orders" onClick={() => handlerMenu()}>
             Ordenes
           </AdminNavLinkItem>
-          <button onClick={() => logout()}>
-            Cerrar sesión <FiLogOut />
-          </button>
+          <AdminLogout onClick={() => logout()}>
+            Cerrar sesión <FiLogOut style={{ fontSize: '20px' }} />
+          </AdminLogout>
         </AdminNavBar>
 
         <Link to="/">

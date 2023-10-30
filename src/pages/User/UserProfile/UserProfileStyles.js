@@ -86,6 +86,7 @@ export const UserNavLinkItem = styled(AdminNavLinkItem)`
   font-weight: 600;
   width: 100%;
   transition: 6s all ease;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -103,7 +104,18 @@ export const UserNavLinkItem = styled(AdminNavLinkItem)`
   }
 `;
 
-export const ContainerInfoUserProfile = styled.div``;
+export const UserLogout = styled.span`
+  color: black;
+  font-weight: 600;
+  width: 100%;
+  transition: 6s all ease;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    transition: 6s all ease;
+  }
+`;
 
 export const DataProfile = styled.div`
   display: flex;
