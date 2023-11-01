@@ -85,17 +85,17 @@ export const AdminOrders = () => {
             </thead>
 
             <tbody>
-              {data?.data.map((order) => {
-                return (
+              {data ? (
+                data.data.map((order) => (
                   <tr key={order.id}>
-                    <td style={{ verticalAlign: 'inherit' }}>{order.id}</td>
-                    <td style={{ verticalAlign: 'inherit' }}>
+                    <td style={{ verticalAlign: 'top' }}>{order.id}</td>
+                    <td style={{ verticalAlign: 'top' }}>
                       <OrderUsername userId={order.userId} />
                     </td>
                     <td>{order.status}</td>
                     <td>{formatDate(order.created_at)}</td>
-                    <td style={{ verticalAlign: 'inherit' }}>
-                      <BtnViewOrder ordenes={data} />
+                    <td style={{ verticalAlign: 'top' }}>
+                      <BtnViewOrder order={order} />
                     </td>
                     <td
                       style={{
@@ -109,8 +109,15 @@ export const AdminOrders = () => {
                       </DeleteButtonOrder>
                     </td>
                   </tr>
-                );
-              })}
+                ))
+              ) : (
+                <tr>
+                  <td>
+                    {' '}
+                    <Loader />{' '}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>{' '}
         </div>{' '}

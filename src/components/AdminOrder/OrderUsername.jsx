@@ -46,7 +46,7 @@ export const OrderUsername = ({ userId }) => {
   return (
     <div style={{ display: 'flex', gap: '5px' }}>
       <p style={{ color: 'blue' }}>#{userDetail.id}</p>
-      <p>
+      <p style={{ textTransform: 'capitalize' }}>
         {' '}
         {userDetail.name} {userDetail.lastname}{' '}
       </p>

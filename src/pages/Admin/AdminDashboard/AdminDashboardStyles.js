@@ -194,3 +194,11 @@ export const AdminNavLinkMobile = styled(NavLink)`
     font-size: 21px;
   }
 `;
+export const BtnOrderView = styled.button`
+  background: transparent;
+  border: navajowhite;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;

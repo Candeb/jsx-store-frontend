@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import OrderListAdmin from '../../pages/Admin/AdminOrders/OrderListAdmin';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
+import CardOrderDetail from '../../pages/User/UserOrders/CardOrderDetail';
+import { BtnOrderView } from '../../pages/Admin/AdminDashboard/AdminDashboardStyles';
 
-const BtnViewOrder = ({ ordenes }) => {
+const BtnViewOrder = ({ order }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleToggleModal = () => {
@@ -11,21 +12,23 @@ const BtnViewOrder = ({ ordenes }) => {
 
   return (
     <div>
-      <button onClick={handleToggleModal}>
+      <BtnOrderView onClick={handleToggleModal}>
         {modalOpen ? (
-          <span>
-            Cerrar orden <IoIosArrowDown />
-          </span>
+          <>
+            Ocultar productos <IoIosArrowDown />
+          </>
         ) : (
-          <span>
-            Ver orden <IoIosArrowForward />
-          </span>
+          <>
+            Ver productos <IoIosArrowForward />
+          </>
         )}
-      </button>
+      </BtnOrderView>
 
       {modalOpen && (
         <div>
-          <OrderListAdmin ordenes={ordenes} />
+          <CardOrderDetail
+            productId={order.products.map((product) => product.productId)}
+          />
         </div>
       )}
     </div>

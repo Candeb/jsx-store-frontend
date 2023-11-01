@@ -4,7 +4,6 @@ import { useQuery } from 'react-query';
 import {
   ContainerOrderProduct,
   ImgOrderProduct,
-  OrderProductBrand,
   OrderProductName,
   OrderProductDescription,
   ContainerDetailOrderProduct,
@@ -25,8 +24,7 @@ export default function CardOrderDetail({ productId }) {
   if (isLoading) {
     return (
       <div>
-        {' '}
-        <Loader />{' '}
+        <Loader />
       </div>
     );
   }

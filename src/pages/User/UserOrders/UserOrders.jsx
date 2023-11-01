@@ -30,21 +30,32 @@ export const UserOrders = () => {
     fetchOrdersByUserId
   );
 
-  if (isLoading) return <Loader />;
-  if (isError) return `Error: ${error.message}`;
+  if (isLoading) {
+    return <Loader />;
+  }
 
-  return (
-    <UserContainer>
-      <UserMenu />
-      <ContainerInfoUser>
-        <ContainerTitleRoute>
-          <TitleRouteUser> Mis compras </TitleRouteUser>
-          <DivTriangUser></DivTriangUser>
-        </ContainerTitleRoute>
-        <ContainerSection>
-          <OrderList ordenes={data} />
-        </ContainerSection>
-      </ContainerInfoUser>
-    </UserContainer>
-  );
+  if (isError) {
+    return `Error: ${error.message}`;
+  }
+
+  // Verificar si los datos están disponibles
+  if (data) {
+    return (
+      <UserContainer>
+        <UserMenu />
+        <ContainerInfoUser>
+          <ContainerTitleRoute>
+            <TitleRouteUser> Mis compras </TitleRouteUser>
+            <DivTriangUser></DivTriangUser>
+          </ContainerTitleRoute>
+          <ContainerSection>
+            <OrderList ordenes={data} />
+          </ContainerSection>
+        </ContainerInfoUser>
+      </UserContainer>
+    );
+  } else {
+    // Puedes mostrar un mensaje de "Cargando" o similar si los datos aún no están disponibles.
+    return <Loader />;
+  }
 };

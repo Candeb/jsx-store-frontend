@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import {
   CardOrder,
-  DetailDate,
   DetailOrder,
   ContainerCardOrders,
   ViewProducts,
@@ -28,6 +27,7 @@ const OrderListAdmin = ({ ordenes }) => {
 
   const orders = ordenes.data;
   console.log('orders-->', orders);
+  console.log('ordenes', ordenes);
 
   // Crear un objeto de estados isOpen para controlar cada tarjeta de pedido
   const [isOpenState, setIsOpenState] = useState({});
