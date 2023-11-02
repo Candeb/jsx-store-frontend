@@ -7,21 +7,38 @@ import {
 } from '../Admin/AdminDashboard/AdminDashboardStyles';
 import { AdminMenu } from '../../components/AdminMenu/AdminMenu';
 import { ModalTitleStyled } from '../../components/AdminBrand/ModalFormBrands/ModalFormStyles';
+import axios from 'axios';
 
 export async function fetchBrand(id) {
+  const accessToken = localStorage.getItem('accessToken');
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+
   const response = await fetch(
-    `https://jsx-store-api.onrender.com/brand/${id}`
+    `https://jsx-store-api.onrender.com/brand/${id}`,
+    {
+      headers,
+    }
   );
+
   return response.json();
 }
 
 export async function updateBrand(updatedBrand) {
+  const accessToken = localStorage.getItem('accessToken');
+
+  if (!accessToken) {
+    return Promise.reject(new Error('No se encontró el token de acceso.'));
+  }
+
   const response = await fetch(
     `https://jsx-store-api.onrender.com/brand/update/${updatedBrand.id}`,
     {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(updatedBrand),
     }

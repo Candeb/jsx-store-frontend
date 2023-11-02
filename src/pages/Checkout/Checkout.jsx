@@ -81,7 +81,6 @@ export const Checkout = () => {
       dispatch(cartActions.clearCart());
       window.alert('¡Compra realizada con éxito!');
     } catch (error) {
-      // Maneja cualquier error que ocurra durante la solicitud
       console.error('errrorr', error);
     }
   };
@@ -99,7 +98,7 @@ export const Checkout = () => {
   };
 
   const handleSaveClick = (e) => {
-    e.preventDefault(); // Evitar la recarga de la página
+    e.preventDefault();
     setIsFormSaved(true);
   };
   return (

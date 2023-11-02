@@ -2,8 +2,17 @@ import axios from 'axios';
 import { SELECT_CATEGORY } from './categories-actions';
 
 export const fetchBrands = () => {
-  const url = 'https://jsx-store-api.onrender.com/brand/allbrands';
-  return axios.get(url);
+  const url = 'https://jsx-store-api.onrender.com/brand/brands/active';
+
+  const accessToken = localStorage.getItem('accessToken');
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+  const config = {
+    headers: headers,
+  };
+
+  return axios.get(url, config);
 };
 
 const Categories = fetchBrands();

@@ -10,7 +10,17 @@ import {
 } from '../UserProfile/UserProfileStyles';
 import { Loader } from '../../../components/Loader/Loader';
 
-export default function CardOrderDetail({ productId }) {
+export default function CardOrderDetail({ order }) {
+  return (
+    <>
+      {order.products.map((product) => (
+        <ProductDetail key={product.id} productId={product.productId} />
+      ))}
+    </>
+  );
+}
+
+function ProductDetail({ productId }) {
   const fetchProduct = (id) => {
     const url = `https://jsx-store-api.onrender.com/product/${id}`;
     return axios.get(url);
@@ -50,7 +60,7 @@ export default function CardOrderDetail({ productId }) {
         <OrderProductDescription>
           {productDetail.description}
         </OrderProductDescription>
-        <OrderProductName>${productDetail.price}</OrderProductName>{' '}
+        <OrderProductName>${productDetail.price}</OrderProductName>
       </ContainerDetailOrderProduct>
     </ContainerOrderProduct>
   );

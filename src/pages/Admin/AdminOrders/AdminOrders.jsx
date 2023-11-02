@@ -14,9 +14,9 @@ import { ModalOrderUser } from '../../../components/AdminOrder/ModalOrderUser';
 import { DeleteButtonOrder } from '../../../components/AdminOrder/DeleteButtonOrder';
 import { ModalOrderProduct } from '../../../components/AdminOrder/ModalOrderProduct';
 import { Box, Button } from '@mui/material';
-import OrderListAdmin from './OrderListAdmin';
 import BtnViewOrder from '../../../components/AdminOrder/BtnViewOrder';
 import { OrderUsername } from '../../../components/AdminOrder/OrderUsername';
+import TotalOrder from '../../../components/User/TotalOrder';
 
 export const fetchOrders = () => {
   const url = 'https://jsx-store-api.onrender.com/order/orders';
@@ -79,42 +79,47 @@ export const AdminOrders = () => {
                 <th>Usuario</th>
                 <th>Estado</th>
                 <th>Fecha</th>
-                <th>Productos</th>
+                <th>Detalle</th>
                 <th>Acciones</th>
               </tr>
             </thead>
 
             <tbody>
               {data ? (
-                data.data.map((order) => (
-                  <tr key={order.id}>
-                    <td style={{ verticalAlign: 'top' }}>{order.id}</td>
-                    <td style={{ verticalAlign: 'top' }}>
-                      <OrderUsername userId={order.userId} />
-                    </td>
-                    <td>{order.status}</td>
-                    <td>{formatDate(order.created_at)}</td>
-                    <td style={{ verticalAlign: 'top' }}>
-                      <BtnViewOrder order={order} />
-                    </td>
-                    <td
-                      style={{
-                        display: 'flex',
-                        gap: '5px',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      <DeleteButtonOrder id={order.id}>
-                        Eliminar
-                      </DeleteButtonOrder>
-                    </td>
-                  </tr>
-                ))
+                data.data.map((order) => {
+                  const productIds = order.products.map(
+                    (product) => product.productId
+                  );
+
+                  return (
+                    <tr key={order.id}>
+                      <td style={{ verticalAlign: 'top' }}>{order.id}</td>
+                      <td style={{ verticalAlign: 'top' }}>
+                        <OrderUsername userId={order.userId} />
+                      </td>
+                      <td>{order.status}</td>
+                      <td>{formatDate(order.created_at)}</td>
+                      <td style={{ verticalAlign: 'top' }}>
+                        <BtnViewOrder order={order} productIds={productIds} />
+                      </td>
+                      <td
+                        style={{
+                          display: 'flex',
+                          gap: '5px',
+                          flexDirection: 'column',
+                        }}
+                      >
+                        <DeleteButtonOrder id={order.id}>
+                          Eliminar
+                        </DeleteButtonOrder>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
                   <td>
-                    {' '}
-                    <Loader />{' '}
+                    <Loader />
                   </td>
                 </tr>
               )}

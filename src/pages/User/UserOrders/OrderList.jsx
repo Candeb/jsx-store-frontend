@@ -16,6 +16,7 @@ import {
   TextEmptyCart,
 } from '../../../components/Header/Cart/ModalCartStyles';
 import { IoBagOutline } from 'react-icons/io5';
+import TotalOrder from '../../../components/User/TotalOrder';
 
 export const fetchProducts = () => {
   const url = 'https://jsx-store-api.onrender.com/product/products';
@@ -23,10 +24,18 @@ export const fetchProducts = () => {
 };
 
 const OrderList = ({ ordenes }) => {
-  const { isLoading, data, error, isError } = useQuery(
-    'products',
-    fetchProducts
-  );
+  // Verificar si ordenes no está disponible o no contiene la propiedad 'orders'
+  if (!ordenes || !ordenes[0] || !ordenes[0].orders) {
+    return (
+      <EmptyCart style={{ padding: '25px', paddingTop: '0' }}>
+        <IconEmptyCart>
+          <IoBagOutline />
+        </IconEmptyCart>
+        <TextEmptyCart>Todavía no tenés compras registradas</TextEmptyCart>
+      </EmptyCart>
+    );
+  }
+
   const datas = ordenes[0];
   const orders = datas.orders;
 
@@ -76,67 +85,67 @@ const OrderList = ({ ordenes }) => {
           <TextEmptyCart>Todavía no tenés compras registradas</TextEmptyCart>
         </EmptyCart>
       ) : (
-        orders.map((order) => (
-          <CardOrder key={order.id}>
-            <DetailDate>
-              <p>{formatDate(order.created_at)}</p>
-            </DetailDate>
-            <DetailOrder>
-              <span>Orden #{order.id}</span>
-              <div>
-                <p>Estado: Esperando el pago</p>
-              </div>
-              <ViewProducts onClick={() => toggleText(order.id)}>
-                {order.products.length === 0 ? (
-                  'No hay productos'
-                ) : (
-                  <>
-                    {isOpenState[order.id] ? (
-                      <>
-                        {order.products.length === 1 ? (
-                          <>
-                            Ocultar {order.products.length} producto{' '}
-                            <IoIosArrowDown />
-                          </>
-                        ) : (
-                          <>
-                            Ocultar {order.products.length} productos{' '}
-                            <IoIosArrowDown />
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {order.products.length === 1 ? (
-                          <>
-                            Ver {order.products.length} producto{' '}
-                            <IoIosArrowForward />
-                          </>
-                        ) : (
-                          <>
-                            Ver {order.products.length} productos{' '}
-                            <IoIosArrowForward />
-                          </>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
-              </ViewProducts>
-            </DetailOrder>
+        orders.map((order) => {
+          const productIds = order.products.map((product) => product.productId);
 
-            {isOpenState[order.id] && (
-              <div>
-                {order.products.map((product) => (
-                  <CardOrderDetail
-                    key={product.id}
-                    productId={product.productId}
-                  />
-                ))}
-              </div>
-            )}
-          </CardOrder>
-        ))
+          return (
+            <CardOrder key={order.id}>
+              <DetailDate>
+                <p>{formatDate(order.created_at)}</p>
+              </DetailDate>
+              <DetailOrder>
+                <span>Orden #{order.id}</span>
+                <div>
+                  <p>Estado: Esperando el pago</p>
+                </div>
+                <TotalOrder productIds={productIds} />
+                <ViewProducts onClick={() => toggleText(order.id)}>
+                  {order.products.length === 0 ? (
+                    'No hay productos'
+                  ) : (
+                    <>
+                      {isOpenState[order.id] ? (
+                        <>
+                          {order.products.length === 1 ? (
+                            <>
+                              Ocultar {order.products.length} producto{' '}
+                              <IoIosArrowDown />
+                            </>
+                          ) : (
+                            <>
+                              Ocultar {order.products.length} productos{' '}
+                              <IoIosArrowDown />
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {order.products.length === 1 ? (
+                            <>
+                              Ver {order.products.length} producto{' '}
+                              <IoIosArrowForward />
+                            </>
+                          ) : (
+                            <>
+                              Ver {order.products.length} productos{' '}
+                              <IoIosArrowForward />
+                            </>
+                          )}
+                        </>
+                      )}
+                    </>
+                  )}
+                </ViewProducts>
+              </DetailOrder>
+
+              {isOpenState[order.id] && (
+                <div>
+                  <CardOrderDetail order={order} />
+                </div>
+              )}
+            </CardOrder>
+          );
+        })
       )}
     </ContainerCardOrders>
   );

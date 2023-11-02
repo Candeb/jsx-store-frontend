@@ -2,7 +2,11 @@ import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
 const addBrand = (brand) => {
-  return axios.post('https://jsx-store-api.onrender.com/brand/new', brand);
+  return axios.post('https://jsx-store-api.onrender.com/brand/new', brand, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  });
 };
 
 export const useAddBrand = () => {

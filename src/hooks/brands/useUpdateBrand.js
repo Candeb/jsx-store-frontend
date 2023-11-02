@@ -4,7 +4,12 @@ import { useMutation, useQueryClient } from 'react-query';
 const updateBrand = (brand) => {
   return axios.put(
     `https://jsx-store-api.onrender.com/brand/update/${brand.id}`,
-    brand
+    brand,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }
   );
 };
 

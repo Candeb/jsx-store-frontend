@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 import CardOrderDetail from '../../pages/User/UserOrders/CardOrderDetail';
 import { BtnOrderView } from '../../pages/Admin/AdminDashboard/AdminDashboardStyles';
+import TotalOrder from '../User/TotalOrder';
 
 const BtnViewOrder = ({ order }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -25,11 +26,14 @@ const BtnViewOrder = ({ order }) => {
       </BtnOrderView>
 
       {modalOpen && (
-        <div>
-          <CardOrderDetail
-            productId={order.products.map((product) => product.productId)}
+        <>
+          <div>
+            <CardOrderDetail order={order} />
+          </div>
+          <TotalOrder
+            productIds={order.products.map((product) => product.productId)}
           />
-        </div>
+        </>
       )}
     </div>
   );

@@ -11,7 +11,7 @@ export const Sneakers = () => {
   const [selectedBrand, setSelectedBrand] = useState(null);
 
   const fetchBrands = async () => {
-    const url = 'https://jsx-store-api.onrender.com/brand/allbrands';
+    const url = 'https://jsx-store-api.onrender.com/brand/brands/active';
     const response = await axios.get(url);
     return response.data;
   };
@@ -67,7 +67,7 @@ export const Sneakers = () => {
       <Categorias
         onCategoriaClick={handleCategoriaClick}
         onDeselectCategoriaClick={handleDeselectCategoriaClick}
-        brands={brands}
+        brands={brands || []}
       />
       {isLoadingProducts && <Loader />}
       {isErrorProducts && (
@@ -77,7 +77,9 @@ export const Sneakers = () => {
       )}
       <Products
         selectedBrand={selectedBrand}
-        products={filteredProducts.length > 0 ? filteredProducts : products}
+        products={
+          (filteredProducts.length > 0 ? filteredProducts : products) || []
+        }
       />
     </>
   );

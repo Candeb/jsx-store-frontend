@@ -4,6 +4,11 @@ import { useMutation, useQueryClient } from 'react-query';
 const deleteBrand = (brandId) => {
   return axios.delete(
     `https://jsx-store-api.onrender.com/brand/delete/${brandId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    },
     { transformResponse: () => brandId }
   );
 };
