@@ -10,18 +10,25 @@ import {
 import { AdminMenu } from '../../../components/AdminMenu/AdminMenu';
 import { useQuery } from 'react-query';
 import { Loader } from '../../../components/Loader/Loader';
-import { ModalOrderUser } from '../../../components/AdminOrder/ModalOrderUser';
 import { DeleteButtonOrder } from '../../../components/AdminOrder/DeleteButtonOrder';
-import { ModalOrderProduct } from '../../../components/AdminOrder/ModalOrderProduct';
 import { Box, Button } from '@mui/material';
 import BtnViewOrder from '../../../components/AdminOrder/BtnViewOrder';
 import { OrderUsername } from '../../../components/AdminOrder/OrderUsername';
-import TotalOrder from '../../../components/User/TotalOrder';
 
 export const fetchOrders = () => {
   const url = 'https://jsx-store-api.onrender.com/order/orders';
-
-  return axios.get(url);
+  const accessToken = localStorage.getItem('accessToken');
+  if (accessToken) {
+    return axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } else {
+    return Promise.reject(
+      'No se encontró el token de acceso en el almacenamiento local.'
+    );
+  }
 };
 
 export const AdminOrders = () => {
@@ -35,8 +42,10 @@ export const AdminOrders = () => {
   );
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
+    if (isIdle) {
+      refetch();
+    }
+  }, [isIdle, refetch]);
 
   const formatDate = (isoDate) => {
     const fecha = new Date(isoDate);
@@ -80,12 +89,13 @@ export const AdminOrders = () => {
                 <th>Estado</th>
                 <th>Fecha</th>
                 <th>Detalle</th>
+                <th>Actividad</th>
                 <th>Acciones</th>
               </tr>
             </thead>
 
             <tbody>
-              {data ? (
+              {data && data.data ? (
                 data.data.map((order) => {
                   const productIds = order.products.map(
                     (product) => product.productId
@@ -101,6 +111,9 @@ export const AdminOrders = () => {
                       <td>{formatDate(order.created_at)}</td>
                       <td style={{ verticalAlign: 'top' }}>
                         <BtnViewOrder order={order} productIds={productIds} />
+                      </td>
+                      <td style={{ verticalAlign: 'top' }}>
+                        {order.deleted_at === null ? 'Activa' : 'Eliminada'}
                       </td>
                       <td
                         style={{

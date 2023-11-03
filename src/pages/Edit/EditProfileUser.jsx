@@ -10,24 +10,32 @@ import { ModalTitleStyled } from '../../components/AdminBrand/ModalFormBrands/Mo
 import { Loader } from '../../components/Loader/Loader';
 
 export async function fetchUser(id) {
+  const accessToken = localStorage.getItem('accessToken');
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
   const response = await fetch(
     `https://jsx-store-api.onrender.com/auth/user/id/${id}`,
     {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
+      headers,
     }
   );
   return response.json();
 }
 
 export async function updateUser(updatedUser) {
+  const accessToken = localStorage.getItem('accessToken');
+
+  if (!accessToken) {
+    return Promise.reject(new Error('No se encontró el token de acceso.'));
+  }
   const response = await fetch(
     `https://jsx-store-api.onrender.com/auth/update/${updatedUser.id}`,
     {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(updatedUser),
     }
@@ -87,7 +95,6 @@ export const EditProfileUser = () => {
       </div>
     );
   } else {
-    // Puedes mostrar un mensaje de carga aquí si lo deseas
     return <Loader />;
   }
 };

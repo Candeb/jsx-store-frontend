@@ -38,7 +38,6 @@ export const UserOrders = () => {
     return `Error: ${error.message}`;
   }
 
-  // Verificar si los datos están disponibles
   if (data) {
     return (
       <UserContainer>
@@ -55,7 +54,6 @@ export const UserOrders = () => {
       </UserContainer>
     );
   } else {
-    // Puedes mostrar un mensaje de "Cargando" o similar si los datos aún no están disponibles.
     return <Loader />;
   }
 };

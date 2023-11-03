@@ -22,9 +22,19 @@ export const ModalFormProducts = ({ message, description }) => {
   const { mutate } = useAddProduct();
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    let newValue;
+
+    if (name === 'price' || name === 'brandsId') {
+      // Si el campo es 'price' o 'brandsId', convierte el valor a número
+      newValue = parseFloat(value);
+    } else {
+      // Si no es 'price' ni 'brandsId', utiliza el valor directamente
+      newValue = value;
+    }
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [name]: newValue,
     });
   };
 
@@ -80,10 +90,36 @@ export const ModalFormProducts = ({ message, description }) => {
                   .then((res) => {
                     handleClose();
                     setForm({});
-                    mutate(res);
+                    mutate(res, {
+                      onError: (error) => {
+                        console.error('Error al crear el producto:', error);
+                        alert('Error al crear el producto');
+                      },
+                    });
                     console.log('product--->', res);
+                    console.log('Tipo de dato de res:', typeof res);
+
+                    // Agregar más logs para cada propiedad del objeto 'res'
+                    console.log('Tipo de dato de res.name:', typeof res.name);
+                    console.log(
+                      'Tipo de dato de res.description:',
+                      typeof res.description
+                    );
+                    console.log('Tipo de dato de res.price:', typeof res.price);
+                    console.log(
+                      'Tipo de dato de res.brandsId:',
+                      typeof res.brandsId
+                    );
+                    console.log(
+                      'Tipo de dato de res.available:',
+                      typeof res.available
+                    );
+                    // Agregar más para las otras propiedades
                   })
-                  .catch((err) => alert(err))
+                  .catch((err) => {
+                    console.error('Error al crear el producto:', err);
+                    alert('Error al crear el producto: ' + err.message);
+                  })
               }
             >
               Crear

@@ -2,9 +2,12 @@ import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
 const addUser = (user) => {
-  return axios.post('https://jsx-store-api.onrender.com/auth/register', user);
+  return axios.post('https://jsx-store-api.onrender.com/auth/register', user, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  });
 };
-
 export const useAddUser = () => {
   const queryClient = useQueryClient();
 

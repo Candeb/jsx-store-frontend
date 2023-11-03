@@ -10,7 +10,6 @@ export const AdminContainer = styled.div`
 `;
 
 export const ContainerAdminNavBar = styled.aside`
-  width: 230px;
   background-color: #686868b3;
   display: flex;
   flex-direction: column;

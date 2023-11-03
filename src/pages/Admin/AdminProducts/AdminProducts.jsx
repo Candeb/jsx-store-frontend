@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import {
   AdminContainer,
@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import { DeleteButtonProduct } from '../../../components/AdminProduct/DeleteButtonProduct';
 
 export const fetchProducts = () => {
-  // const url = 'http://localhost:3002/brand/brands';
   const url = 'https://jsx-store-api.onrender.com/product/products';
   return axios.get(url);
 };
@@ -28,10 +27,6 @@ export const AdminProducts = () => {
     fetchProducts
   );
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   const navigate = useNavigate();
 
   return (
@@ -41,7 +36,7 @@ export const AdminProducts = () => {
         <ContainerTitleRoute>
           <TitleRoute> Products </TitleRoute>
           <DivTriang></DivTriang>
-        </ContainerTitleRoute>{' '}
+        </ContainerTitleRoute>
         <ModalFormProducts
           message={'Añadir nuevo producto'}
           description={'Aqui puedes añadir los datos del producto'}
@@ -65,67 +60,71 @@ export const AdminProducts = () => {
               </tr>
             </thead>
 
-            <tbody>
-              {data?.data.map((product) => {
-                return (
-                  <tr key={product.id}>
-                    <td style={{ verticalAlign: 'inherit' }}>{product.id}</td>
-                    <td style={{ verticalAlign: 'inherit' }}>{product.name}</td>
-                    <td style={{ verticalAlign: 'inherit' }}>
-                      {product.description}
-                    </td>
-                    <td style={{ verticalAlign: 'inherit' }}>
-                      ${product.price}
-                    </td>
-                    <td>
-                      {' '}
-                      <img
-                        src={product.picture}
-                        style={{
-                          height: '80px',
-                          objectFit: 'contain',
-                          width: '100%',
-                        }}
-                      />{' '}
-                    </td>
-                    <td style={{ verticalAlign: 'inherit' }}>
-                      {product.available ? 'En stock' : 'Sin stock'}
-                    </td>
-                    <td style={{ verticalAlign: 'inherit' }}>
-                      {product.brandsId}
-                      {/* {product.brandsId === 1
-                        ? ` ${product.brandsId}: Nike`
-                        : product.brandsId === 2
-                        ? `${product.brandsId}: Adidas`
-                        : `${product.brandsId}: Balenciaga`} */}
-                    </td>
-                    <td style={{ verticalAlign: 'inherit' }}>
-                      {product.deleted_at === null ? 'Activo' : 'Eliminado'}
-                    </td>
-                    <td
-                      style={{
-                        display: 'flex',
-                        gap: '5px',
-                        flexDirection: 'column',
-                      }}
-                    >
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          navigate(`/admin/products/edit/${product.id}`)
-                        }
-                      >
-                        <FontAwesomeIcon icon={faEdit} />
-                      </button>
-                      <DeleteButtonProduct id={product.id}>
-                        eliminar
-                      </DeleteButtonProduct>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>{' '}
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <tbody>
+                {data &&
+                  data.data &&
+                  data.data.map((product) => {
+                    return (
+                      <tr key={product.id}>
+                        <td style={{ verticalAlign: 'top' }}>{product.id}</td>
+                        <td style={{ verticalAlign: 'top' }}>{product.name}</td>
+                        <td style={{ verticalAlign: 'top', fontSize: '15px' }}>
+                          {product.description}
+                        </td>
+                        <td style={{ verticalAlign: 'top' }}>
+                          ${product.price}
+                        </td>
+                        <td>
+                          <img
+                            src={product.picture}
+                            style={{
+                              height: '80px',
+                              objectFit: 'contain',
+                              width: '100%',
+                            }}
+                          />
+                        </td>
+                        <td style={{ verticalAlign: 'top' }}>
+                          {product.available ? 'En stock' : 'Sin stock'}
+                        </td>
+                        <td style={{ verticalAlign: 'top' }}>
+                          {product.brandsId === 1
+                            ? `Nike`
+                            : product.brandsId === 2
+                            ? `Adidas`
+                            : `Balenciaga`}
+                        </td>
+                        <td style={{ verticalAlign: 'top' }}>
+                          {product.deleted_at === null ? 'Activo' : 'Eliminado'}
+                        </td>
+                        <td
+                          style={{
+                            display: 'flex',
+                            gap: '5px',
+                            flexDirection: 'column',
+                          }}
+                        >
+                          <button
+                            className="btn btn-primary"
+                            onClick={() =>
+                              navigate(`/admin/products/edit/${product.id}`)
+                            }
+                          >
+                            <FontAwesomeIcon icon={faEdit} />
+                          </button>
+                          <DeleteButtonProduct id={product.id}>
+                            eliminar
+                          </DeleteButtonProduct>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            )}
+          </table>
         </div>
         {isLoading && <Loader />}
         {isError && (

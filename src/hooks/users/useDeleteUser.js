@@ -3,7 +3,12 @@ import { useMutation, useQueryClient } from 'react-query';
 
 const deleteUser = (id) => {
   return axios.delete(
-    `https://jsx-store-api.onrender.com/auth/delete/id/${id}`
+    `https://jsx-store-api.onrender.com/auth/delete/id/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }
   );
 };
 

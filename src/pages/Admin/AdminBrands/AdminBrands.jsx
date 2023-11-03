@@ -19,15 +19,7 @@ import { DeleteButtonBrand } from '../../../components/AdminBrand/DeleteButtonBr
 export const fetchBrands = () => {
   const url = 'https://jsx-store-api.onrender.com/brand/brands/active';
 
-  const accessToken = localStorage.getItem('accessToken');
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
-  const config = {
-    headers: headers,
-  };
-
-  return axios.get(url, config);
+  return axios.get(url);
 };
 
 export const AdminBrands = () => {

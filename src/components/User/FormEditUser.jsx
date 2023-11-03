@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FormEditUser = ({ onSubmit, initialValue }) => {
   const [user, setUser] = useState({
@@ -7,7 +8,6 @@ const FormEditUser = ({ onSubmit, initialValue }) => {
     email: initialValue.email || '',
   });
 
-  // Agrega un efecto para actualizar el estado cuando initialValue cambia
   useEffect(() => {
     setUser({
       name: initialValue.name || '',
@@ -15,6 +15,10 @@ const FormEditUser = ({ onSubmit, initialValue }) => {
       email: initialValue.email || '',
     });
   }, [initialValue]);
+
+  const navigate = useNavigate();
+
+  const userId = localStorage.getItem('userId');
 
   const handleChangeInput = (e) => {
     setUser({
@@ -78,7 +82,7 @@ const FormEditUser = ({ onSubmit, initialValue }) => {
       >
         <button
           onClick={() => {
-            navigate(`/user/${user.id}`);
+            navigate(`/user/${userId}`);
           }}
           className="btn btn-outline-secondary"
         >

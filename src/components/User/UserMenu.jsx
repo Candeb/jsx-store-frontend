@@ -27,7 +27,7 @@ export const UserMenu = ({ name }) => {
   const { logout } = useAuth();
   const [click, setClick] = useState(false);
 
-  const userId = localStorage.getItem('userId'); //obtener el ID del usuario
+  const userId = localStorage.getItem('userId');
 
   const handlerMenu = () => {
     setClick(!click);

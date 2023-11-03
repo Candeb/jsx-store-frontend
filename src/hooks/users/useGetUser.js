@@ -2,9 +2,15 @@ import axios from 'axios';
 import { useQuery, useQueryClient } from 'react-query';
 
 const fetchUsers = ({ queryKey }) => {
-  console.log('queryKey ==> ', queryKey);
   const userId = queryKey[1];
-  return axios.get(`https://jsx-store-api.onrender.com/auth/user/id/${userId}`);
+  return axios.get(
+    `https://jsx-store-api.onrender.com/auth/user/id/${userId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }
+  );
 };
 
 export const useUserData = (name, userId) => {

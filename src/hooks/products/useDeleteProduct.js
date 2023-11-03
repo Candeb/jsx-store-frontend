@@ -1,10 +1,15 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-const deleteProduct = (productId) => {
+export const deleteProduct = (productId) => {
   return axios.delete(
     `https://jsx-store-api.onrender.com/product/delete/${productId}`,
-    { transformResponse: () => productId }
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+      transformResponse: () => productId,
+    }
   );
 };
 
